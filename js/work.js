@@ -1,5 +1,5 @@
 // Landing page lists, each shown newest first.
-//   work:     research projects       -> rendered into #work-list
+//   work:     research & prototyping  -> rendered into #work-list
 //   personal: personal projects       -> rendered into #personal-list
 //   talks:    talks and workshops     -> rendered into #talks-list
 //   prototypes: web app prototypes    -> rendered into #prototypes-list
@@ -13,11 +13,11 @@
 const work = [
   {
     title: "The Wristband Project",
-    date: "Aug 2026",
-    context: "Personal project",
+    date: "2026",
+    context: "Research case study",
     inProgress: true,
     description:
-      "An ongoing personal project. Details coming soon.",
+      "An ongoing research case study. Details coming soon.",
     tags: [],
     link: "",
     imageURL: "images/thumbnails/square/wristband-placeholder.svg",
@@ -25,7 +25,7 @@ const work = [
   },
   {
     title: "Elixir Expedition: Embodied Agents in VR",
-    date: "Dec 2023",
+    date: "2023",
     context: "Virtual Environments · UT Austin",
     description:
       "A VR game built in Unity to support user studies on embodied agents, evaluating body ownership, presence, immersion, fear, and system usability (SUS).",
@@ -35,12 +35,27 @@ const work = [
     videoURL: "media/thumbnails/elixir-youtube-square.mp4",
     newTab: false,
   },
+  {
+    title: "Solar-Assisted Smartphone Charging Case",
+    date: "2018",
+    context: "Engineering case study · Undergraduate",
+    description: [
+      "Solar-powered calculators have existed for decades, so why couldn't we use the same principle to extend a smartphone's battery life? This question inspired us to develop an **Arduino-based solar charging case** that could harvest ambient light and supplement a smartphone's battery. We iterated through multiple hardware and enclosure designs, balancing energy-harvesting efficiency, portability, and the challenge of maintaining a slim form factor.",
+      "The system uses **solar panels to harvest energy from available light**, including low-intensity ambient light under suitable conditions. An **energy-harvesting circuit** manages the collected power and stores it in an array of supercapacitors, which act as temporary energy buffers. A regulated boost and charging circuit then transfers the accumulated energy to the case's rechargeable battery. We also developed a companion **Android application** to control charging, allowing users to limit the phone's charge to approximately 80% to help reduce battery degradation.",
+      "I co-developed this prototype with a business school colleague, combining hardware prototyping, embedded systems, mobile application development, and product design. We registered the project as a startup venture through our undergraduate university's **Technology Business Incubation Center**, where we received mentorship and research funding under the **Make in India** initiative.",
+    ],
+    tags: ["Arduino", "Hardware Prototyping", "Energy Harvesting", "Android"],
+    link: "",
+    imageURL: "media/thumbnails/smart-mod-square-poster.jpg",
+    videoURL: "media/thumbnails/smart-mod-square.mp4",
+    newTab: false,
+  },
 ];
 
 const personal = [
   {
     title: "Teleoperating a Robot Arm through VR",
-    date: "",
+    date: "2026",
     context: "Personal project",
     inProgress: true,
     description:
@@ -52,7 +67,7 @@ const personal = [
   },
   {
     title: "Flow State Timer: Rethinking Pomodoro",
-    date: "",
+    date: "2026",
     context: "Personal project",
     description:
       "A tangible focus device that starts with a short, adjustable commitment and then becomes an open-ended stopwatch, helping people start working without telling them when to stop.",
@@ -60,18 +75,6 @@ const personal = [
     link: "",
     imageURL: "media/thumbnails/flow-state-timer-square-poster.jpg",
     videoURL: "media/thumbnails/flow-state-timer-square.mp4",
-    newTab: false,
-  },
-  {
-    title: "Smart Mod: Solar Phone Charging Case",
-    date: "",
-    context: "Personal project · Undergraduate",
-    description:
-      "An Arduino-enabled phone case powered by solar energy and controllable over Bluetooth, built with a friend from business school. It earned recognition from our university's technology business incubation department.",
-    tags: ["Arduino", "Hardware Prototyping", "Bluetooth"],
-    link: "",
-    imageURL: "media/thumbnails/smart-mod-square-poster.jpg",
-    videoURL: "media/thumbnails/smart-mod-square.mp4",
     newTab: false,
   },
 ];
