@@ -100,9 +100,14 @@ a:focus-visible, .btn:focus-visible {
 .hero-role { font-size: 19px; color: var(--ink-2); margin: 0 0 20px; }
 .hero-bio { color: var(--ink-2); margin: 0 0 16px; max-width: 60ch; }
 
+.interests-label {
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--ink-3); margin: 24px 0 10px;
+}
 .interests {
   display: flex; flex-wrap: wrap; gap: 8px;
-  list-style: none; padding: 0; margin: 20px 0 28px;
+  list-style: none; padding: 0; margin: 0 0 28px;
 }
 
 .hero-links { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -206,11 +211,18 @@ a:focus-visible, .btn:focus-visible {
 }
 .logos img { height: 48px; width: auto; filter: grayscale(1); opacity: 0.75; transition: 0.2s; }
 .logos img:hover { filter: none; opacity: 1; }
+.logo-lockup { display: flex; align-items: center; gap: 0; filter: grayscale(1); opacity: 0.75; transition: 0.2s; }
+.logo-lockup img { filter: none; opacity: 1; }
+.logo-lockup:hover { filter: none; opacity: 1; }
+.logo-lockup-text {
+  font-family: "Segoe UI", var(--sans); font-size: 26px; font-weight: 600;
+  color: #737373; padding-left: 12px; margin-left: -3px; border-left: 2px solid #737373; line-height: 1.1;
+}
 
 /* ---------- Contact / footer ---------- */
 .contact { padding: 72px 0; text-align: center; }
 .contact h2 { font-family: var(--serif); font-weight: 600; font-size: 30px; margin: 0 0 12px; }
-.contact p { color: var(--ink-2); margin: 0 auto 28px; max-width: 52ch; }
+.contact p { color: var(--ink-2); margin: 0 auto 28px; max-width: 64ch; }
 .contact .hero-links { justify-content: center; }
 
 .footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--ink-3); font-size: 14px; }
