@@ -343,3 +343,15 @@ a:focus-visible, .btn:focus-visible {
 }
 
 .case .video-grid, .case .gallery { margin-bottom: 56px; }
+
+/* ---------- Square images everywhere ---------- */
+.work-item { grid-template-columns: 240px 1fr; }
+.work-media img { aspect-ratio: 1 / 1; }
+.hero-photo img { aspect-ratio: 1 / 1; }
+.case-hero { max-width: 600px; }
+.case-hero img { aspect-ratio: 1 / 1; max-height: none; object-position: center 45%; }
+.gallery img { aspect-ratio: 1 / 1; }
+@media (max-width: 860px) {
+  .work-item { grid-template-columns: minmax(0, 1fr); }
+  .work-media { max-width: 360px; }
+}

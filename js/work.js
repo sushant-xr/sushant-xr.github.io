@@ -15,7 +15,19 @@ const work = [
       "An ongoing personal project. Details coming soon.",
     tags: [],
     link: "",
-    imageURL: "images/thumbnails/wristband-placeholder.svg",
+    imageURL: "images/thumbnails/square/wristband-placeholder.svg",
+    newTab: false,
+  },
+  {
+    title: "Teleoperating a Robot Arm through VR",
+    date: "Jul 2026",
+    context: "Personal project",
+    inProgress: true,
+    description:
+      "Controlling a 3D-printed, servo-driven robot arm from virtual reality. Details coming soon.",
+    tags: ["Virtual Reality", "Robotics", "Teleoperation"],
+    link: "",
+    imageURL: "images/thumbnails/square/vr-robot-arm.jpg",
     newTab: false,
   },
   {
@@ -26,7 +38,7 @@ const work = [
       "A tangible focus device that starts with a short, adjustable commitment and then becomes an open-ended stopwatch, helping people start working without telling them when to stop.",
     tags: ["Physical Computing", "Interaction Design", "Haptics", "HCI"],
     link: "/flow-state-timer.html",
-    imageURL: "images/thumbnails/flow-state-timer.jpg",
+    imageURL: "images/thumbnails/square/flow-state-timer.jpg",
     newTab: false,
   },
   {
@@ -37,7 +49,7 @@ const work = [
       "Designed and ran a beginner-friendly hands-on workshop where participants built their first mixed reality experience on Meta Quest, emphasizing creativity over technical complexity.",
     tags: ["Mixed Reality", "Bezi", "Meta Quest", "Workshop"],
     link: "/workshop-blending-realities.html",
-    imageURL: "images/thumbnails/blending-realities.png",
+    imageURL: "images/thumbnails/square/blending-realities.jpg",
     newTab: false,
   },
   {
@@ -48,7 +60,7 @@ const work = [
       "An augmented reality module built with WebXR and integrated into an e-commerce portal, letting shoppers place furniture in their own room before purchasing.",
     tags: ["Augmented Reality", "WebXR", "JavaScript"],
     link: "https://github.com/sushantkamble-dev/cozy-craft-ar",
-    imageURL: "images/thumbnails/cozy-craft.png",
+    imageURL: "images/thumbnails/square/cozy-craft.jpg",
     newTab: true,
   },
   {
@@ -59,7 +71,7 @@ const work = [
       "A server-rendered Next.js app connecting local shelters with potential adopters through pet listings and location-based recommendations.",
     tags: ["Web App", "Next.js", "MongoDB", "Figma"],
     link: "https://github.com/sushantkamble-dev/paw-finder",
-    imageURL: "images/thumbnails/paw-finder.png",
+    imageURL: "images/thumbnails/square/paw-finder.jpg",
     newTab: true,
   },
   {
@@ -70,7 +82,7 @@ const work = [
       "A VR game built in Unity to support user studies on embodied agents, evaluating body ownership, presence, immersion, fear, and system usability (SUS).",
     tags: ["Virtual Reality", "Unity", "Blender", "C#", "User Study"],
     link: "/elixir-expedition.html",
-    imageURL: "images/thumbnails/elixir-expedition.png",
+    imageURL: "images/thumbnails/square/elixir-expedition.jpg",
     newTab: false,
   },
   {
@@ -81,7 +93,7 @@ const work = [
       "A simplified Trello-style project management tool for creating boards and cards to organize tasks.",
     tags: ["Web App", "React", "Firebase"],
     link: "https://github.com/sushantkamble-dev/kanban-board",
-    imageURL: "images/thumbnails/kanban-board.png",
+    imageURL: "images/thumbnails/square/kanban-board.jpg",
     newTab: true,
   },
   {
@@ -92,7 +104,7 @@ const work = [
       "A drag-and-drop editor that lets data scientists and analysts merge, split, and filter data without code. Led the front-end, design system, and coded prototypes.",
     tags: ["Web App", "React", "Design Systems", "Figma"],
     link: "./no-code-editor.html",
-    imageURL: "images/thumbnails/no-code-editor.png",
+    imageURL: "images/thumbnails/square/no-code-editor.jpg",
     newTab: false,
   },
 ];
