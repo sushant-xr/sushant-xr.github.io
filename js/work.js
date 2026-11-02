@@ -71,7 +71,7 @@ const work = [
       "A VR game built in Unity to support user studies on embodied agents, evaluating body ownership, presence, immersion, fear, and system usability (SUS).",
     tags: ["Virtual Reality", "Unity", "Blender", "C#", "User Study"],
     link: "/elixir-expedition.html",
-    imageURL: "images/thumbnails/square/elixir-expedition.jpg",
+    imageURL: "images/thumbnails/square/elixir-expedition-scene.jpg",
     newTab: false,
   },
   {
