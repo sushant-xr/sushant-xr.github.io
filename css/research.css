@@ -191,6 +191,8 @@ a:focus-visible, .btn:focus-visible {
 }
 .work-title a { color: var(--ink); }
 .work-desc { color: var(--ink-2); margin: 0 0 14px; }
+.work-desc + .work-desc { margin-top: -4px; }
+.work-desc strong { color: var(--ink); font-weight: 600; }
 
 /* ---------- Collaborators ---------- */
 .collab { padding: 48px 0; background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }

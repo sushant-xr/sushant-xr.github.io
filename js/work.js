@@ -5,7 +5,8 @@
 //   prototypes: web app prototypes    -> rendered into #prototypes-list
 // To add an entry, copy one object and edit the fields.
 //   date:        label shown in the timeline (e.g. "Feb 2024")
-//   description: one or two sentences shown under the title
+//   description: text shown under the title; use an array for several
+//                paragraphs, and **double asterisks** for bold
 //   newTab:      true for external links (e.g. GitHub)
 //   inProgress:  true shows an "In progress" label
 //   link:        leave empty ("") if there's no page yet; the button is hidden
@@ -79,11 +80,15 @@ const talks = [
   {
     title: "Blending Realities: A Mixed Reality Workshop",
     date: "Feb 2024",
-    context: "Workshop · Immersive Media Studio · UT Austin",
-    description:
-      "Designed and ran a beginner-friendly hands-on workshop where participants built their first mixed reality experience on Meta Quest, emphasizing creativity over technical complexity.",
-    tags: ["Mixed Reality", "Bezi", "Meta Quest"],
-    link: "/workshop-blending-realities.html",
+    context: "Workshop · UT Austin · In collaboration with Bezi",
+    description: [
+      "As a **Bezi Fellow**, I co-organized and facilitated a beginner-friendly XR workshop in collaboration with Bezi, a browser-based platform for designing and prototyping 3D and XR experiences, as part of a five-person team.",
+      "We chose **Bezi over Unity** for its accessibility, eliminating the need for software installation and allowing participants to explore XR through WebXR. Our team developed an interactive demo that participants could recreate during the workshop, introducing fundamental 3D design concepts and optimization techniques, including lossless texture optimization.",
+      "For many participants, this was their first exposure to XR technology. The most rewarding part was watching them transition from following instructions to experimenting with their own creative ideas through hands-on prototyping.",
+      "We concluded the workshop by sharing a comprehensive Notion resource with tutorials and learning materials, enabling participants to continue exploring XR development independently, even without owning a VR headset.",
+    ],
+    tags: ["Mixed Reality", "Bezi", "Figma", "Meta Quest"],
+    link: "",
     imageURL: "media/thumbnails/blending-realities-merged-poster.jpg",
     videoURL: "media/thumbnails/blending-realities-merged.mp4",
     newTab: false,
@@ -91,9 +96,12 @@ const talks = [
   {
     title: "Unity Optimizations for Meta Quest",
     date: "Nov 2023",
-    context: "Talk · UT Austin",
-    description:
-      "A talk on optimizing Unity projects to run smoothly on standalone Meta Quest headsets, with live demos of techniques such as occlusion culling in the Unity editor.",
+    context: "Talk · Virtual Environments · UT Austin",
+    description: [
+      "I delivered a technical talk at UT Austin as part of the **Virtual Environments** course, focusing on optimizing Unity-based VR experiences for standalone Meta Quest headsets and addressing performance challenges that can affect immersion and contribute to motion sickness.",
+      "The session covered essential VR development and optimization techniques, including **interpupillary distance (IPD) calibration, occlusion culling, static batching, Level of Detail (LOD), baked lighting and shadows, and light and reflection probes**. I also demonstrated advanced techniques, such as dynamically switching between precomputed lightmaps to simulate lighting changes in response to user interactions, such as turning lights on and off.",
+      "Through live demonstrations, attendees learned to identify performance bottlenecks, evaluate rendering performance, and validate their optimizations using **Meta Quest Developer Hub and OVR Metrics Tool**. The goal was to help students improve the performance and frame-rate stability of their VR projects, minimize potential sources of motion sickness, and create more comfortable and reliable experiences for their user studies.",
+    ],
     tags: ["Unity", "Meta Quest", "Performance"],
     link: "",
     imageURL: "images/thumbnails/square/unity-quest-talk.jpg",
@@ -148,6 +156,11 @@ function escapeHTML(value) {
   })[c]);
 }
 
+// Escapes text, then turns **phrase** into bold.
+function formatText(value) {
+  return escapeHTML(value).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+}
+
 function renderTimeline(listId, items) {
   const list = document.getElementById(listId);
   if (!list) return;
@@ -180,7 +193,7 @@ function renderTimeline(listId, items) {
         <div class="work-body">
           <p class="work-meta">${date ? `<time>${escapeHTML(date)}</time> · ` : ""}${escapeHTML(context)}${badge}</p>
           <h3 class="work-title">${heading}</h3>
-          <p class="work-desc">${escapeHTML(description)}</p>
+          ${[].concat(description).map((p) => `<p class="work-desc">${formatText(p)}</p>`).join("")}
           ${tagItems ? `<ul class="tags" aria-label="Tags">${tagItems}</ul>` : ""}
           ${button}
         </div>
