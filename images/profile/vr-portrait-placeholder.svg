@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Placeholder: portrait wearing a VR headset">
+  <rect width="800" height="1000" fill="#e9edf2"/>
+  <!-- shoulders -->
+  <path d="M120 1000 C140 800 260 720 400 720 C540 720 660 800 680 1000 Z" fill="#cfd6df"/>
+  <!-- neck -->
+  <rect x="350" y="600" width="100" height="140" rx="30" fill="#c2cad4"/>
+  <!-- head -->
+  <ellipse cx="400" cy="460" rx="150" ry="180" fill="#c2cad4"/>
+  <!-- headset strap -->
+  <path d="M252 430 C250 300 550 300 548 430" fill="none" stroke="#5b6573" stroke-width="22" stroke-linecap="round"/>
+  <!-- headset visor -->
+  <rect x="235" y="400" width="330" height="140" rx="58" fill="#2b313a"/>
+  <rect x="262" y="425" width="276" height="90" rx="42" fill="#3b4450"/>
+  <circle cx="335" cy="470" r="8" fill="#0389ff"/>
+  <text x="400" y="900" text-anchor="middle" font-family="monospace" font-size="30" fill="#5b6573">PHOTO PLACEHOLDER</text>
+</svg>
