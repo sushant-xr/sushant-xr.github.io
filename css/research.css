@@ -243,3 +243,103 @@ a:focus-visible, .btn:focus-visible {
   width: 8px; height: 8px; border-radius: 50%; background: #1a9e5a;
   box-shadow: 0 0 0 3px rgba(26, 158, 90, 0.18);
 }
+
+/* ---------- In-progress work items ---------- */
+.badge-progress {
+  display: inline-block; margin-left: 8px; padding: 1px 8px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+  color: #8a5a00; background: #fff4dc; border: 1px solid #f1d9a6; border-radius: 999px;
+  vertical-align: 1px;
+}
+.work-item.is-progress .work-marker {
+  border-style: dashed; border-color: #c98a00;
+}
+
+/* ---------- Case study pages ---------- */
+.case { padding: 48px 0 24px; }
+.case-narrow { max-width: 760px; }
+.back-link { display: inline-flex; gap: 6px; font-size: 15px; font-weight: 500; color: var(--ink-2); margin-bottom: 32px; }
+.back-link:hover { color: var(--ink); text-decoration: none; }
+.back-link-bottom { margin: 48px 0 0; }
+.case-title {
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(36px, 5vw, 52px); line-height: 1.1; margin: 0 0 10px;
+}
+.case-subtitle { font-size: 20px; color: var(--ink-2); margin: 0 0 32px; }
+.case-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px 32px; margin: 0 0 40px; padding: 20px 0;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.case-meta dt {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px;
+}
+.case-meta dd { margin: 0; font-size: 15px; }
+.case-hero { margin: 0 auto 56px; max-width: 900px; }
+.case-hero img {
+  width: 100%; max-height: 640px; object-fit: cover; object-position: center 55%;
+  border-radius: 8px; background: var(--bg-soft);
+}
+
+.prose h2 {
+  font-family: var(--serif); font-weight: 600; font-size: 26px;
+  margin: 48px 0 14px;
+}
+.prose h2:first-child { margin-top: 0; }
+.prose p { color: var(--ink-2); margin: 0 0 16px; }
+.pull-quote {
+  margin: 8px 0 16px; padding: 4px 0 4px 24px;
+  border-left: 3px solid var(--accent);
+  font-family: var(--serif); font-size: 26px; line-height: 1.35; color: var(--ink);
+}
+.callout {
+  margin: 40px 0 0; padding: 24px 28px;
+  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 8px;
+}
+.callout-label {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent) !important; margin: 0 0 8px !important;
+}
+.callout p:last-child { margin: 0; color: var(--ink); font-weight: 500; }
+
+.gallery {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px;
+}
+.gallery figure { margin: 0; }
+.gallery img {
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+  border-radius: 6px; background: var(--bg-soft);
+}
+.gallery figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-2); }
+.gallery figcaption span { font-family: var(--mono); color: var(--accent); margin-right: 6px; }
+
+@media (max-width: 860px) {
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .gallery { grid-template-columns: minmax(0, 1fr); }
+  .pull-quote { font-size: 22px; }
+}
+
+.video-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 320px));
+  justify-content: center; gap: 32px; margin: 8px 0 24px;
+}
+.video-grid figure { margin: 0; }
+.video-grid video {
+  width: 100%; aspect-ratio: 9 / 16; object-fit: cover;
+  border-radius: 8px; background: #000; display: block;
+}
+.video-grid figcaption { margin-top: 10px; font-size: 14px; color: var(--ink-2); }
+.gallery-plain { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 860px) {
+  .gallery-plain { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .video-grid { grid-template-columns: minmax(0, 1fr); }
+  .gallery-plain { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.case .video-grid, .case .gallery { margin-bottom: 56px; }

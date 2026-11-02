@@ -3,7 +3,32 @@
 //   date:        label shown in the timeline (e.g. "Feb 2024")
 //   description: one or two sentences shown under the title
 //   newTab:      true for external links (e.g. GitHub)
+//   inProgress:  true shows an "In progress" label
+//   link:        leave empty ("") if there's no page yet; the button is hidden
 const work = [
+  {
+    title: "The Wristband Project",
+    date: "Aug 2026",
+    context: "Personal project",
+    inProgress: true,
+    description:
+      "An ongoing personal project. Details coming soon.",
+    tags: [],
+    link: "",
+    imageURL: "images/thumbnails/wristband-placeholder.svg",
+    newTab: false,
+  },
+  {
+    title: "Flow State Timer: Rethinking Pomodoro",
+    date: "Jun 2026",
+    context: "Personal project",
+    description:
+      "A tangible focus device that starts with a short, adjustable commitment and then becomes an open-ended stopwatch, helping people start working without telling them when to stop.",
+    tags: ["Physical Computing", "Interaction Design", "Haptics", "HCI"],
+    link: "/flow-state-timer.html",
+    imageURL: "images/thumbnails/flow-state-timer.jpg",
+    newTab: false,
+  },
   {
     title: "Blending Realities: A Mixed Reality Workshop",
     date: "Feb 2024",
@@ -83,25 +108,34 @@ function renderWork() {
   if (!list) return;
 
   list.innerHTML = work
-    .map(({ title, date, context, description, tags, link, imageURL, newTab }) => {
+    .map(({ title, date, context, description, tags, link, imageURL, newTab, inProgress }) => {
       const target = newTab ? ' target="_blank" rel="noopener"' : "";
       const tagItems = tags
         .map((tag) => `<li class="tag">${escapeHTML(tag)}</li>`)
         .join("");
-      return `
-      <li class="work-item">
-        <div class="work-marker" aria-hidden="true"></div>
-        <a class="work-media" href="${link}"${target} tabindex="-1" aria-hidden="true">
-          <img src="${imageURL}" alt="" loading="lazy" />
-        </a>
-        <div class="work-body">
-          <p class="work-meta"><time>${escapeHTML(date)}</time> · ${escapeHTML(context)}</p>
-          <h3 class="work-title"><a href="${link}"${target}>${escapeHTML(title)}</a></h3>
-          <p class="work-desc">${escapeHTML(description)}</p>
-          <ul class="tags" aria-label="Tags">${tagItems}</ul>
-          <a class="btn-link" href="${link}"${target}>
+      const image = `<img src="${imageURL}" alt="" loading="lazy" />`;
+      const media = link
+        ? `<a class="work-media" href="${link}"${target} tabindex="-1" aria-hidden="true">${image}</a>`
+        : `<div class="work-media">${image}</div>`;
+      const heading = link
+        ? `<a href="${link}"${target}>${escapeHTML(title)}</a>`
+        : escapeHTML(title);
+      const badge = inProgress ? ` <span class="badge-progress">In progress</span>` : "";
+      const button = link
+        ? `<a class="btn-link" href="${link}"${target}>
             ${newTab ? "View on GitHub" : "Read more"} <span aria-hidden="true">→</span>
-          </a>
+          </a>`
+        : "";
+      return `
+      <li class="work-item${inProgress ? " is-progress" : ""}">
+        <div class="work-marker" aria-hidden="true"></div>
+        ${media}
+        <div class="work-body">
+          <p class="work-meta"><time>${escapeHTML(date)}</time> · ${escapeHTML(context)}${badge}</p>
+          <h3 class="work-title">${heading}</h3>
+          <p class="work-desc">${escapeHTML(description)}</p>
+          ${tagItems ? `<ul class="tags" aria-label="Tags">${tagItems}</ul>` : ""}
+          ${button}
         </div>
       </li>`;
     })
