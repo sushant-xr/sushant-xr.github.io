@@ -64,15 +64,15 @@ const work = [
     newTab: true,
   },
   {
-    title: "Paw Finder",
-    date: "Dec 2023",
-    context: "Web Application Development · UT Austin",
+    title: "Unity Optimizations for Meta Quest",
+    date: "Nov 2023",
+    context: "Talk · UT Austin",
     description:
-      "A server-rendered Next.js app connecting local shelters with potential adopters through pet listings and location-based recommendations.",
-    tags: ["Web App", "Next.js", "MongoDB", "Figma"],
-    link: "https://github.com/sushantkamble-dev/paw-finder",
-    imageURL: "images/thumbnails/square/paw-finder.jpg",
-    newTab: true,
+      "A talk on optimizing Unity projects to run smoothly on standalone Meta Quest headsets, with live demos of techniques such as occlusion culling in the Unity editor.",
+    tags: ["Talk", "Unity", "Meta Quest", "Performance"],
+    link: "",
+    imageURL: "images/thumbnails/square/unity-quest-talk.jpg",
+    newTab: false,
   },
   {
     title: "Elixir Expedition: Embodied Agents in VR",
@@ -84,17 +84,6 @@ const work = [
     link: "/elixir-expedition.html",
     imageURL: "images/thumbnails/square/elixir-expedition.jpg",
     newTab: false,
-  },
-  {
-    title: "Kanban Board",
-    date: "May 2023",
-    context: "Personal project",
-    description:
-      "A simplified Trello-style project management tool for creating boards and cards to organize tasks.",
-    tags: ["Web App", "React", "Firebase"],
-    link: "https://github.com/sushantkamble-dev/kanban-board",
-    imageURL: "images/thumbnails/square/kanban-board.jpg",
-    newTab: true,
   },
   {
     title: "Flows: No-Code Editor for Data Transformation",
