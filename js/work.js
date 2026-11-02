@@ -39,7 +39,7 @@ const work = [
 const personal = [
   {
     title: "Teleoperating a Robot Arm through VR",
-    date: "Jul 2026",
+    date: "",
     context: "Personal project",
     inProgress: true,
     description:
@@ -51,13 +51,26 @@ const personal = [
   },
   {
     title: "Flow State Timer: Rethinking Pomodoro",
-    date: "Jun 2026",
+    date: "",
     context: "Personal project",
     description:
       "A tangible focus device that starts with a short, adjustable commitment and then becomes an open-ended stopwatch, helping people start working without telling them when to stop.",
     tags: ["Physical Computing", "Interaction Design", "Haptics", "HCI"],
-    link: "/flow-state-timer.html",
-    imageURL: "images/thumbnails/square/flow-state-timer.jpg",
+    link: "",
+    imageURL: "media/thumbnails/flow-state-timer-square-poster.jpg",
+    videoURL: "media/thumbnails/flow-state-timer-square.mp4",
+    newTab: false,
+  },
+  {
+    title: "Smart Mod: Solar Phone Charging Case",
+    date: "",
+    context: "Personal project · Undergraduate",
+    description:
+      "An Arduino-enabled phone case powered by solar energy and controllable over Bluetooth, built with a friend from business school. It earned recognition from our university's technology business incubation department.",
+    tags: ["Arduino", "Hardware Prototyping", "Bluetooth"],
+    link: "",
+    imageURL: "media/thumbnails/smart-mod-square-poster.jpg",
+    videoURL: "media/thumbnails/smart-mod-square.mp4",
     newTab: false,
   },
 ];
@@ -91,6 +104,16 @@ const talks = [
 // videoURL (optional): a short muted looping clip used as the thumbnail
 // instead of imageURL; imageURL is then used as the poster frame.
 const prototypes = [
+  {
+    title: "Beheld Caller App",
+    date: "2024–Present",
+    context: "UX Engineer · Beheld Health Inc.",
+    description: "Details coming soon.",
+    tags: [],
+    link: "",
+    imageURL: "images/thumbnails/square/beheld-placeholder.svg",
+    newTab: false,
+  },
   {
     title: "Flows: No-Code Editor for Data Transformation",
     date: "2020–2022",
@@ -155,7 +178,7 @@ function renderTimeline(listId, items) {
         <div class="work-marker" aria-hidden="true"></div>
         ${media}
         <div class="work-body">
-          <p class="work-meta"><time>${escapeHTML(date)}</time> · ${escapeHTML(context)}${badge}</p>
+          <p class="work-meta">${date ? `<time>${escapeHTML(date)}</time> · ` : ""}${escapeHTML(context)}${badge}</p>
           <h3 class="work-title">${heading}</h3>
           <p class="work-desc">${escapeHTML(description)}</p>
           ${tagItems ? `<ul class="tags" aria-label="Tags">${tagItems}</ul>` : ""}
