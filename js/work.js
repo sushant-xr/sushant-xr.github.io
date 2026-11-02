@@ -53,19 +53,8 @@ const work = [
     newTab: false,
   },
   {
-    title: "Unity Optimizations for Meta Quest",
-    date: "Nov 2023",
-    context: "Talk · UT Austin",
-    description:
-      "A talk on optimizing Unity projects to run smoothly on standalone Meta Quest headsets, with live demos of techniques such as occlusion culling in the Unity editor.",
-    tags: ["Talk", "Unity", "Meta Quest", "Performance"],
-    link: "",
-    imageURL: "images/thumbnails/square/unity-quest-talk.jpg",
-    newTab: false,
-  },
-  {
     title: "Elixir Expedition: Embodied Agents in VR",
-    date: "2023",
+    date: "Dec 2023",
     context: "Virtual Environments · UT Austin",
     description:
       "A VR game built in Unity to support user studies on embodied agents, evaluating body ownership, presence, immersion, fear, and system usability (SUS).",
@@ -75,14 +64,14 @@ const work = [
     newTab: false,
   },
   {
-    title: "Flows: No-Code Editor for Data Transformation",
-    date: "2022",
-    context: "Frontend Lead · Clarista Inc.",
+    title: "Unity Optimizations for Meta Quest",
+    date: "Nov 2023",
+    context: "Talk · UT Austin",
     description:
-      "A drag-and-drop editor that lets data scientists and analysts merge, split, and filter data without code. Led the front-end, design system, and coded prototypes.",
-    tags: ["Web App", "React", "Design Systems", "Figma"],
-    link: "./no-code-editor.html",
-    imageURL: "images/thumbnails/square/flows-editor.jpg",
+      "A talk on optimizing Unity projects to run smoothly on standalone Meta Quest headsets, with live demos of techniques such as occlusion culling in the Unity editor.",
+    tags: ["Talk", "Unity", "Meta Quest", "Performance"],
+    link: "",
+    imageURL: "images/thumbnails/square/unity-quest-talk.jpg",
     newTab: false,
   },
 ];
