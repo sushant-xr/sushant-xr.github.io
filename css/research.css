@@ -232,18 +232,6 @@ a:focus-visible, .btn:focus-visible {
   * { transition: none !important; }
 }
 
-/* ---------- PhD status badge ---------- */
-.status {
-  display: inline-flex; align-items: center; gap: 8px;
-  margin: 0 0 18px; padding: 5px 12px;
-  font-size: 14px; font-weight: 500; color: #0b4f8f;
-  background: var(--accent-soft); border: 1px solid #c5def6; border-radius: 999px;
-}
-.status-dot {
-  width: 8px; height: 8px; border-radius: 50%; background: #1a9e5a;
-  box-shadow: 0 0 0 3px rgba(26, 158, 90, 0.18);
-}
-
 /* ---------- In-progress work items ---------- */
 .badge-progress {
   display: inline-block; margin-left: 8px; padding: 1px 8px;
@@ -355,3 +343,17 @@ a:focus-visible, .btn:focus-visible {
   .work-item { grid-template-columns: minmax(0, 1fr); }
   .work-media { max-width: 360px; }
 }
+
+.section-divided { border-top: 1px solid var(--line); }
+@media (max-width: 420px) {
+  .nav-brand { font-size: 17px; }
+  .nav-links { gap: 14px; }
+  .nav-links a { font-size: 14px; }
+}
+
+/* Video thumbnails in the timeline */
+.work-media video {
+  width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; background: #fff;
+}
+/* Keep the name on one line in the nav */
+.nav-brand { white-space: nowrap; }

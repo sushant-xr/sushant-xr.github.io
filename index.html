@@ -28,11 +28,12 @@
         <a href="index.html" class="nav-brand">Sushant Kamble</a>
         <nav aria-label="Primary">
           <ul class="nav-links">
-            <li><a href="#portfolio-section">Work</a></li>
+            <li><a href="index.html" aria-current="page">Home</a></li>
             <li><a href="/about.html">About</a></li>
             <li>
               <a href="/resume/Resume - Sushant Kamble.pdf" target="_blank" rel="noopener">CV</a>
             </li>
+            <li><a href="mailto:sushantkamble.xr@gmail.com">Email</a></li>
           </ul>
         </nav>
       </div>
@@ -44,19 +45,15 @@
         <div class="container hero-grid">
           <div class="hero-photo">
             <figure>
-              <!-- Replace with your photo wearing a VR headset (4:5 portrait works best) -->
+              <!-- Square photo works best (shown at 300px) -->
               <img
-                src="images/profile/vr-portrait-placeholder.svg"
-                alt="Sushant Kamble wearing a VR headset"
+                src="images/profile/vr-portrait.jpg"
+                alt="Sushant Kamble wearing a Meta Quest headset during a mixed reality demo, with the virtual scene projected on the screen behind"
               />
             </figure>
           </div>
 
           <div class="hero-text">
-            <p class="status">
-              <span class="status-dot" aria-hidden="true"></span>
-              Applying to PhD programs for Fall 2027
-            </p>
             <p class="eyebrow">Extended Reality · Human-Computer Interaction</p>
             <h1>Sushant Kamble</h1>
             <p class="hero-role">
@@ -83,10 +80,8 @@
             </ul>
 
             <div class="hero-links">
-              <a class="btn btn-primary" href="mailto:sushantkamble.xr@gmail.com">Email me</a>
-              <a class="btn btn-ghost" href="/resume/Resume - Sushant Kamble.pdf" target="_blank" rel="noopener">CV</a>
-              <a class="btn btn-ghost" href="https://www.linkedin.com/in/sushant-kamble/" target="_blank" rel="noopener">LinkedIn</a>
-              <a class="btn btn-ghost" href="https://github.com/sushantkamble-dev" target="_blank" rel="noopener">GitHub</a>
+              <a class="btn btn-primary" href="/resume/Resume - Sushant Kamble.pdf" target="_blank" rel="noopener" download>Download CV</a>
+              <a class="btn btn-ghost" href="mailto:sushantkamble.xr@gmail.com">Email me</a>
             </div>
           </div>
         </div>
@@ -96,10 +91,47 @@
       <section class="section" id="portfolio-section" aria-labelledby="work-title">
         <div class="container">
           <div class="section-head">
-            <h2 class="section-title" id="work-title">Work</h2>
-            <p class="section-note">Research, projects &amp; workshops, newest first</p>
+            <h2 class="section-title" id="work-title">Research Projects</h2>
           </div>
           <ol class="work-list" id="work-list">
+            <!-- populated by js/work.js -->
+          </ol>
+        </div>
+      </section>
+
+      <!-- Personal projects -->
+      <section class="section section-divided" id="personal-projects" aria-labelledby="personal-title">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title" id="personal-title">Personal Projects</h2>
+            <p class="section-note">Things I build on my own time</p>
+          </div>
+          <ol class="work-list" id="personal-list">
+            <!-- populated by js/work.js -->
+          </ol>
+        </div>
+      </section>
+
+      <!-- Talks & workshops -->
+      <section class="section section-divided" id="talks" aria-labelledby="talks-title">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title" id="talks-title">Talks and Workshops</h2>
+          </div>
+          <ol class="work-list" id="talks-list">
+            <!-- populated by js/work.js -->
+          </ol>
+        </div>
+      </section>
+
+      <!-- Web application prototyping (moved from About page) -->
+      <section class="section section-divided" id="web-prototypes" aria-labelledby="prototypes-title">
+        <div class="container">
+          <div class="section-head">
+            <h2 class="section-title" id="prototypes-title">Web Application Prototyping</h2>
+            <p class="section-note">Industry work before XR</p>
+          </div>
+          <ol class="work-list" id="prototypes-list">
             <!-- populated by js/work.js -->
           </ol>
         </div>
@@ -124,13 +156,11 @@
         <div class="container">
           <h2>Let's collaborate</h2>
           <p>
-            I'm applying to PhD programs for Fall 2027 and would love to hear from
-            faculty and labs working in XR and HCI. I'm also open to research
-            collaborations and conversations about immersive technology.
+            Open to research collaborations, XR projects, and conversations about
+            immersive technology.
           </p>
           <div class="hero-links">
             <a class="btn btn-primary" href="mailto:sushantkamble.xr@gmail.com">sushantkamble.xr@gmail.com</a>
-            <a class="btn btn-ghost" href="https://www.linkedin.com/in/sushant-kamble/" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </div>
       </section>
