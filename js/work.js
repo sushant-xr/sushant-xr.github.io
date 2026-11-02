@@ -30,8 +30,8 @@ const work = [
       "A VR game built in Unity to support user studies on embodied agents, evaluating body ownership, presence, immersion, fear, and system usability (SUS).",
     tags: ["Virtual Reality", "Unity", "Blender", "C#", "User Study"],
     link: "/elixir-expedition.html",
-    imageURL: "media/thumbnails/elixir-square-poster.jpg",
-    videoURL: "media/thumbnails/elixir-square.mp4",
+    imageURL: "media/thumbnails/elixir-youtube-square-poster.jpg",
+    videoURL: "media/thumbnails/elixir-youtube-square.mp4",
     newTab: false,
   },
 ];
@@ -84,8 +84,8 @@ const talks = [
       "Designed and ran a beginner-friendly hands-on workshop where participants built their first mixed reality experience on Meta Quest, emphasizing creativity over technical complexity.",
     tags: ["Mixed Reality", "Bezi", "Meta Quest"],
     link: "/workshop-blending-realities.html",
-    imageURL: "media/thumbnails/blending-realities-square-poster.jpg",
-    videoURL: "media/thumbnails/blending-realities-square.mp4",
+    imageURL: "media/thumbnails/blending-realities-merged-poster.jpg",
+    videoURL: "media/thumbnails/blending-realities-merged.mp4",
     newTab: false,
   },
   {
