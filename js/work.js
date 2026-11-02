@@ -49,19 +49,8 @@ const work = [
       "Designed and ran a beginner-friendly hands-on workshop where participants built their first mixed reality experience on Meta Quest, emphasizing creativity over technical complexity.",
     tags: ["Mixed Reality", "Bezi", "Meta Quest", "Workshop"],
     link: "/workshop-blending-realities.html",
-    imageURL: "images/thumbnails/square/blending-realities.jpg",
+    imageURL: "images/thumbnails/square/blending-realities-photo.jpg",
     newTab: false,
-  },
-  {
-    title: "Cozy Craft: WebXR Furniture Preview",
-    date: "Dec 2023",
-    context: "JavaScript Programming · UT Austin",
-    description:
-      "An augmented reality module built with WebXR and integrated into an e-commerce portal, letting shoppers place furniture in their own room before purchasing.",
-    tags: ["Augmented Reality", "WebXR", "JavaScript"],
-    link: "https://github.com/sushantkamble-dev/cozy-craft-ar",
-    imageURL: "images/thumbnails/square/cozy-craft.jpg",
-    newTab: true,
   },
   {
     title: "Unity Optimizations for Meta Quest",
@@ -93,7 +82,7 @@ const work = [
       "A drag-and-drop editor that lets data scientists and analysts merge, split, and filter data without code. Led the front-end, design system, and coded prototypes.",
     tags: ["Web App", "React", "Design Systems", "Figma"],
     link: "./no-code-editor.html",
-    imageURL: "images/thumbnails/square/no-code-editor.jpg",
+    imageURL: "images/thumbnails/square/flows-editor.jpg",
     newTab: false,
   },
 ];
