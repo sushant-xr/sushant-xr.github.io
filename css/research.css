@@ -98,7 +98,7 @@ a:focus-visible, .btn:focus-visible {
   margin: 0 0 8px; letter-spacing: -0.01em;
 }
 .hero-role { font-size: 19px; color: var(--ink-2); margin: 0 0 20px; }
-.hero-bio { color: var(--ink-2); margin: 0 0 16px; max-width: 60ch; }
+.hero-bio { color: var(--ink-2); margin: 0 0 16px; max-width: 60ch; text-align: justify; hyphens: auto; }
 
 .interests-label {
   font-family: var(--mono); font-size: 12px; font-weight: 500;
@@ -195,7 +195,7 @@ a:focus-visible, .btn:focus-visible {
   font-size: 23px; line-height: 1.3; margin: 0 0 10px;
 }
 .work-title a { color: var(--ink); }
-.work-desc { color: var(--ink-2); margin: 0 0 14px; }
+.work-desc { color: var(--ink-2); margin: 0 0 14px; text-align: justify; hyphens: auto; }
 .work-desc + .work-desc { margin-top: -4px; }
 .work-desc strong { color: var(--ink); font-weight: 600; }
 
