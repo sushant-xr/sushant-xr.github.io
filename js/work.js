@@ -12,14 +12,17 @@
 //   link:        leave empty ("") if there's no page yet; the button is hidden
 const work = [
   {
-    title: "The Wristband Project",
-    date: "2026",
-    context: "Research case study",
+    title: "Phantom Touch: A Multimodal Wearable Interface for VR",
+    date: "Nov 2026",
+    context: "Independent research project",
     inProgress: true,
-    description:
-      "An ongoing research case study. Details coming soon.",
-    tags: [],
-    link: "",
+    description: [
+      "Phantom Touch is a **wearable interface prototype** exploring how virtual interactions can produce physical sensations while keeping the **fingerpads free** for direct contact with the real world. The proposed design places actuators on the **nails or backs of the fingers**, with electronics at the wrist. Using **Meta Quest hand tracking**, it aims to let users feel virtual interactions while remaining able to handle physical objects without removing the wearable.",
+      "The first phase, now complete, used inexpensive vibration motors, **ESP32 electronics**, and a small **Unity keyboard demonstration** to establish reliable communication between virtual events and individual fingers. This first stage provides the foundation for the central research direction: translating **UV-indexed height and roughness maps** into **movement-dependent tactile feedback** using **linear resonant actuators**. Planned experiments will investigate how tracking uncertainty, finger movement, and actuator response affect the surface features users can distinguish.",
+      "Informed by research in wearable haptics and texture rendering, Phantom Touch is being designed as an **extensible platform for multisensory VR interaction**. Phase 3 will explore specialist-supervised **electrical muscle stimulation** to simulate recoil at the wrist for FPS shooters, and longer-term directions include **thermal feedback**. The prototype is currently in development, with planned evaluations of texture perception, comfort, and the ability to transition between physical and virtual interactions.",
+    ],
+    tags: ["Haptics", "Wearables", "Meta Quest 3", "Unity", "ESP32"],
+    link: "/phantom-touch.html",
     imageURL: "images/thumbnails/square/wristband-placeholder.svg",
     newTab: false,
   },
