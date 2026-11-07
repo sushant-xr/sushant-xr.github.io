@@ -59,9 +59,10 @@ a:focus-visible, .btn:focus-visible {
   height: 64px;
 }
 .nav-brand {
-  font-family: var(--serif); font-weight: 600; font-size: 20px;
+  font-weight: 700; font-size: 26px; line-height: 1;
   color: var(--ink);
 }
+.nav-brand-dot { color: var(--accent); }
 .nav-brand:hover { text-decoration: none; }
 .nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
 .nav-links a {
@@ -367,7 +368,7 @@ a:focus-visible, .btn:focus-visible {
 
 .section-divided { border-top: 1px solid var(--line); }
 @media (max-width: 420px) {
-  .nav-brand { font-size: 17px; }
+  .nav-brand { font-size: 24px; }
   .nav-links { gap: 14px; }
   .nav-links a { font-size: 14px; }
 }
