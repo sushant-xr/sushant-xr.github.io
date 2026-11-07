@@ -70,13 +70,18 @@ a:focus-visible, .btn:focus-visible {
 .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--ink); text-decoration: none; }
 
 /* ---------- Hero ---------- */
-.hero { padding: 72px 0 64px; border-bottom: 1px solid var(--line); }
+.hero { padding: 56px 0 40px; }
 .hero-grid {
   display: grid;
-  grid-template-columns: 400px 1fr;
-  gap: 56px;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
   align-items: center;
 }
+.hero-text .hero-role { margin-bottom: 24px; }
+
+.intro { padding: 0 0 56px; border-bottom: 1px solid var(--line); }
+.intro .hero-bio { max-width: none; }
+.intro .hero-bio:last-child { margin-bottom: 0; }
 .hero-photo figure { margin: 0; }
 .hero-photo img {
   width: 100%;
@@ -230,13 +235,15 @@ a:focus-visible, .btn:focus-visible {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
-  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-  .hero-photo { max-width: 340px; }
+  .hero-grid { grid-template-columns: 160px minmax(0, 1fr); gap: 28px; }
   .work-item { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 }
 @media (max-width: 560px) {
   body { font-size: 16px; }
-  .hero { padding: 40px 0 48px; }
+  .hero { padding: 40px 0 32px; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .hero-photo { max-width: 160px; }
+  .intro { padding-bottom: 48px; }
   .section { padding: 56px 0; }
   .nav-links { gap: 18px; }
   .section-head { flex-direction: column; gap: 4px; }
