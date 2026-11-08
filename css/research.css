@@ -261,6 +261,7 @@ a:focus-visible, .btn:focus-visible {
 .contact { padding: 72px 0; text-align: center; }
 .contact h2 { font-family: var(--serif); font-weight: 600; font-size: 30px; margin: 0 0 12px; }
 .contact p { color: var(--ink-2); margin: 0 auto 28px; max-width: 64ch; }
+.contact p:not(:last-of-type) { margin-bottom: 16px; }
 .contact .hero-links { justify-content: center; }
 
 .footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--ink-3); font-size: 14px; }
