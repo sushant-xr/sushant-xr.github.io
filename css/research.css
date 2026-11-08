@@ -233,6 +233,22 @@ a:focus-visible, .btn:focus-visible {
 }
 .carousel-dot.is-active { background: #fff; }
 .carousel-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.carousel-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 1;
+  width: 36px; height: 36px; padding: 0; border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  border: none; background: rgba(255, 255, 255, 0.85); color: var(--ink);
+  font-size: 24px; line-height: 1; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  opacity: 0; transition: opacity 0.2s, background 0.15s;
+}
+.carousel-arrow span { margin-top: -3px; }
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
+.carousel:hover .carousel-arrow, .carousel-arrow:focus-visible { opacity: 1; }
+.carousel-arrow:hover { background: #fff; color: var(--accent); }
+.carousel-arrow:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Touch screens have no hover: keep the arrows visible */
+@media (hover: none) { .carousel-arrow { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
   .work-media .carousel-slide { transition: none; }
 }

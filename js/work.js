@@ -81,6 +81,7 @@ const personal = [
       "The entire system is designed to connect with **Alexa**, triggering a sequence of actions when I **dismiss my morning alarm**: refill the reservoir, replace the coffee pod, and start brewing.",
       "It's a slightly overengineered solution to a very small problem, but that's half the fun of building things.",
     ],
+    tags: ["ESP32", "Robotics", "3D Printing", "IoT"],
     link: "",
     images: [
       { src: "images/thumbnails/square/vr-robot-arm.jpg", alt: "3D-printed, servo-driven 6-axis robot arm held up on a desk in front of a monitor" },
@@ -93,18 +94,21 @@ const personal = [
     date: "2026",
     context: "Personal project",
     description: [
-      "Getting started is usually the hardest part of any task. But once I'm finally focused and making progress, the last thing I want is a timer going off and telling me to take a break. Unfortunately, that's exactly what most Pomodoro timers do.",
-      "So I decided to build my own.",
-      "The idea is simple: use the timer to **overcome the initial resistance to starting a task**, not to interrupt the momentum once it's there. I built a small hardware timer that starts with a traditional **25-minute countdown**. Once the time is up, instead of sounding an alarm, it quietly switches to **Flow State mode**, counting upward and tracking how much longer I continue working.",
-      "The prototype uses an **ESP8266 microcontroller, an OLED display, capacitive touch controls, and a vibration motor** for subtle **haptic feedback**. It also **tracks time across different projects**, giving me a better picture of where my focused hours go.",
-      "What started as a small experiment to fix something that annoyed me has become my **daily driver**. It's a simple change to the Pomodoro technique, but one that fits the way I actually like to work.",
+      "Getting started is usually the hardest part of any task. But once I'm finally focused and making progress, I want to finish the task at hand, not stop halfway through because a timer says it's time for a break. Unfortunately, that's exactly what most Pomodoro timers do.",
+      "So I decided to build my own, with two simple rules: **don't interrupt me when I'm focused**, and **don't let my five-minute breaks turn into thirty**.",
+      "The timer starts with a traditional **25-minute countdown**, but instead of sounding an alarm, it quietly transitions into **Flow State mode**, counting upward and tracking the extra time I spend working. No forced breaks, just uninterrupted momentum until I'm ready to stop.",
+      "Breaks, however, are a different story. I've lost count of how many times I've said, \"I'll be back in five minutes,\" only to return half an hour later. So I added a **break-tracking mode** that counts the minutes beyond my planned break and triggers a **repeating haptic reminder** until I stop it. It's deliberately annoying, and that's kind of the point.",
+      "I built the device using an **ESP8266, OLED display, capacitive touch controls, and a vibration motor**. It also **tracks focused work across different projects**.",
+      "What started as a small experiment has become my **daily driver**. It leaves me alone when I'm productive and holds me accountable when I'm procrastinating.",
     ],
+    tags: ["ESP8266", "OLED", "Capacitive Touch", "Haptic Feedback"],
     link: "",
     images: [
       { src: "images/projects/flow-state-timer/flow-state-timer-1.jpg", alt: "Flow State Timer on a desk, its OLED screen reading Flow State +13:52, Keep Going, above minus, zero and plus touch buttons" },
       { src: "images/projects/flow-state-timer/flow-state-timer-session-complete.jpg", alt: "Flow State Timer screen reading Session Complete, PhD Research, 48:55, Flow Recorded" },
       { src: "images/projects/flow-state-timer/flow-state-timer-2.jpg", alt: "Flow State Timer internals laid out: a hand-wired perfboard, an ESP8266 board and a 1200 mAh battery module" },
       { src: "images/projects/flow-state-timer/flow-state-timer-3.jpg", alt: "Side view of the assembled Flow State Timer showing its stacked circuit boards held between fingers" },
+      { src: "images/projects/flow-state-timer/flow-state-timer-break-over.jpg", alt: "Flow State Timer screen reading Break Over, +01:27, Return to Desk" },
     ],
     newTab: false,
   },
@@ -226,7 +230,11 @@ function renderTimeline(listId, items) {
               .map((_, i) => `<button type="button" class="carousel-dot${i === 0 ? " is-active" : ""}" aria-label="Show image ${i + 1} of ${images.length}"></button>`)
               .join("")}</div>`
           : "";
-        media = `<div class="work-media carousel" aria-roledescription="carousel" aria-label="${escapeHTML(title)} photos">${slides}${dots}</div>`;
+        const arrows = images.length > 1
+          ? `<button type="button" class="carousel-arrow carousel-prev" aria-label="Previous image"><span aria-hidden="true">‹</span></button>
+             <button type="button" class="carousel-arrow carousel-next" aria-label="Next image"><span aria-hidden="true">›</span></button>`
+          : "";
+        media = `<div class="work-media carousel" aria-roledescription="carousel" aria-label="${escapeHTML(title)} photos">${slides}${arrows}${dots}</div>`;
       } else {
         const image = videoURL
           ? `<video src="${videoURL}" poster="${imageURL}" muted loop playsinline preload="metadata"${reduceMotion ? "" : " autoplay"}></video>`
@@ -268,6 +276,7 @@ function initCarousel(root) {
   if (slides.length < 2) return;
   let index = 0;
   let timer = null;
+  let userPaused = false; // set once the visitor navigates manually
 
   const show = (next) => {
     slides[index].classList.remove("is-active");
@@ -277,12 +286,16 @@ function initCarousel(root) {
     dots[index].classList.add("is-active");
   };
   const start = () => {
-    if (reduceMotion || timer) return;
+    if (reduceMotion || userPaused || timer) return;
     timer = setInterval(() => show(index + 1), 3500);
   };
   const stop = () => { clearInterval(timer); timer = null; };
+  // Manual navigation stops auto-advance for good
+  const goTo = (i) => { userPaused = true; stop(); show(i); };
 
-  dots.forEach((dot, i) => dot.addEventListener("click", () => { show(i); stop(); start(); }));
+  dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+  root.querySelector(".carousel-prev").addEventListener("click", () => goTo(index - 1));
+  root.querySelector(".carousel-next").addEventListener("click", () => goTo(index + 1));
   root.addEventListener("mouseenter", stop);
   root.addEventListener("mouseleave", start);
   root.addEventListener("focusin", stop);
