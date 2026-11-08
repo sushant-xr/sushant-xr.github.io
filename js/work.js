@@ -175,7 +175,12 @@ const prototypes = [
       "React Native", "TypeScript", "Expo", "Twilio", "Node.js", "AWS", "Sentry",
     ],
     link: "",
-    imageURL: "images/thumbnails/square/beheld-placeholder.svg",
+    imageURL: "images/projects/beheld/beheld-outreach.jpg",
+    images: [
+      { src: "images/projects/beheld/beheld-outreach.jpg", alt: "Beheld app outreach screens: a participant card with Call and Text actions, and an in-app call connecting" },
+      { src: "images/projects/beheld/beheld-call-outcome.jpg", alt: "Beheld app call documentation: recording the call outcome and choosing a reason the participant did not consent" },
+      { src: "images/projects/beheld/beheld-enrolled.jpg", alt: "Beheld app scheduling: setting a weekly call plan and the enrolled participant list with connection statuses" },
+    ],
     newTab: false,
   },
   {
