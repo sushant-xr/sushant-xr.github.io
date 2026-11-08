@@ -454,6 +454,12 @@ a:focus-visible, .btn:focus-visible {
   }
 }
 
+/* ---------- Smooth scrolling (Lenis) ---------- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis does the easing */
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }
+
 /* ---------- Page loading screen ---------- */
 .page-loader {
   position: fixed; inset: 0; z-index: 100;
@@ -502,8 +508,12 @@ a:focus-visible, .btn:focus-visible {
 @media (min-width: 1100px) {
   .section-nav {
     display: block; position: fixed; z-index: 40;
-    right: 20px; top: 50%; transform: translateY(-50%);
+    right: 20px; top: 50%; transform: translate(12px, -50%);
+    /* Hidden until the About content has loaded in (JS adds .is-ready) */
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
   }
+  .section-nav.is-ready { opacity: 1; visibility: visible; transform: translate(0, -50%); }
   .section-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
   .section-nav a {
     display: flex; align-items: center; justify-content: flex-end; gap: 10px;

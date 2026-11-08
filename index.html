@@ -120,6 +120,7 @@
         <div class="container">
           <div class="section-head">
             <h2 class="section-title" id="work-title">Research &amp; Prototyping</h2>
+            <p class="section-note">Turning Questions Into Experiments</p>
           </div>
           <ol class="work-list" id="work-list">
             <!-- populated by js/work.js -->
@@ -132,6 +133,7 @@
         <div class="container">
           <div class="section-head">
             <h2 class="section-title" id="talks-title">Talks and Workshops</h2>
+            <p class="section-note">Teaching What I Wish Someone Had Taught Me</p>
           </div>
           <ol class="work-list" id="talks-list">
             <!-- populated by js/work.js -->
@@ -144,7 +146,7 @@
         <div class="container">
           <div class="section-head">
             <h2 class="section-title" id="prototypes-title">Industry Work</h2>
-            <p class="section-note">Front-end and UX engineering</p>
+            <p class="section-note">Making Software a Little Less Frustrating</p>
           </div>
           <ol class="work-list" id="prototypes-list">
             <!-- populated by js/work.js -->
@@ -157,7 +159,7 @@
         <div class="container">
           <div class="section-head">
             <h2 class="section-title" id="personal-title">Personal Projects</h2>
-            <p class="section-note">Things I build on my own time</p>
+            <p class="section-note">Probably Overengineered, Definitely Fun</p>
           </div>
           <ol class="work-list" id="personal-list">
             <!-- populated by js/work.js -->
@@ -229,6 +231,30 @@
     </footer>
 
     <script src="js/work.js"></script>
+    <!-- Smooth, eased wheel/trackpad scrolling (Lenis) -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+    <script>
+      (() => {
+        if (!window.Lenis || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+        const raf = (time) => {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        };
+        requestAnimationFrame(raf);
+
+        // In-page links (side nav, scroll cue) glide via Lenis, clearing the sticky header
+        document.addEventListener("click", (e) => {
+          const link = e.target.closest('a[href^="#"]');
+          if (!link || link.classList.contains("skip-link")) return;
+          const target = document.querySelector(link.getAttribute("href"));
+          if (!target) return;
+          e.preventDefault();
+          lenis.scrollTo(target, { offset: -80 });
+          history.replaceState(null, "", link.getAttribute("href"));
+        });
+      })();
+    </script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -282,7 +308,11 @@
           ),
         ];
         mark(heroSeq);
-        const startHero = () => show(heroSeq);
+        const startHero = () => {
+          show(heroSeq);
+          // Announce when the last piece has finished animating in (180ms steps + 800ms rise)
+          setTimeout(() => window.dispatchEvent(new Event("hero:done")), (heroSeq.length - 1) * 180 + 800);
+        };
         if (document.querySelector(".page-loader")) {
           window.addEventListener("loader:done", () => setTimeout(startHero, 350), { once: true });
         } else startHero();
@@ -340,10 +370,20 @@
         });
         setActive("home-section");
 
-        // Briefly reveal the labels on load so visitors notice the menu
+        // Show the menu once the About content has finished loading in, then
+        // briefly reveal its labels so visitors notice it
         const nav = document.querySelector(".section-nav");
-        nav.classList.add("is-peek");
-        setTimeout(() => nav.classList.remove("is-peek"), 3000);
+        let shown = false;
+        const showNav = () => {
+          if (shown) return;
+          shown = true;
+          nav.classList.add("is-ready", "is-peek");
+          setTimeout(() => nav.classList.remove("is-peek"), 3000);
+        };
+        if (document.documentElement.classList.contains("js-reveal")) {
+          window.addEventListener("hero:done", showNav, { once: true });
+          setTimeout(showNav, 8000); // safety net
+        } else showNav();
       })();
     </script>
     <script type="module">
