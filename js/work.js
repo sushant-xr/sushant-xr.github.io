@@ -85,12 +85,18 @@ const personal = [
     title: "Flow State Timer: Rethinking Pomodoro",
     date: "2026",
     context: "Personal project",
-    description:
-      "A tangible focus device that starts with a short, adjustable commitment and then becomes an open-ended stopwatch, helping people start working without telling them when to stop.",
-    tags: ["Physical Computing", "Interaction Design", "Haptics", "HCI"],
+    description: [
+      "Most conventional Pomodoro timers interrupt you with an alarm the moment your focus session ends, even when you're fully immersed in a task. But what if the timer's purpose wasn't to tell you when to stop, but to help you get started?",
+      "That question inspired me to build the **Flow State Timer**, a hardware prototype that reimagines the Pomodoro technique as a tool for overcoming the initial resistance to starting a task rather than enforcing rigid work intervals.",
+      "Instead of interrupting your concentration, the timer quietly transitions into **Flow State mode** when the initial countdown ends, automatically counting upward and tracking the additional time spent working. No disruptive alarms, no forced breaks, just the freedom to continue until you're ready to stop.",
+      "Originally built to address my own frustrations with conventional productivity timers, the prototype has since become my **daily driver**, helping me build momentum, stay focused, and track the time I spend on meaningful work.",
+    ],
     link: "",
-    imageURL: "media/thumbnails/flow-state-timer-square-poster.jpg",
-    videoURL: "media/thumbnails/flow-state-timer-square.mp4",
+    images: [
+      { src: "images/projects/flow-state-timer/flow-state-timer-1.jpg", alt: "Flow State Timer on a desk, its OLED screen reading Flow State +13:52, Keep Going, above minus, zero and plus touch buttons" },
+      { src: "images/projects/flow-state-timer/flow-state-timer-2.jpg", alt: "Flow State Timer internals laid out: a hand-wired perfboard, an ESP8266 board and a 1200 mAh battery module" },
+      { src: "images/projects/flow-state-timer/flow-state-timer-3.jpg", alt: "Side view of the assembled Flow State Timer showing its stacked circuit boards held between fingers" },
+    ],
     newTab: false,
   },
 ];
@@ -190,17 +196,31 @@ function renderTimeline(listId, items) {
   if (!list) return;
 
   list.innerHTML = items
-    .map(({ title, date, context, description, tags, link, imageURL, videoURL, newTab, inProgress }) => {
+    .map(({ title, date, context, description, tags, link, imageURL, videoURL, images, newTab, inProgress }) => {
       const target = newTab ? ' target="_blank" rel="noopener"' : "";
-      const tagItems = tags
+      const tagItems = (tags || [])
         .map((tag) => `<li class="tag">${escapeHTML(tag)}</li>`)
         .join("");
-      const image = videoURL
-        ? `<video src="${videoURL}" poster="${imageURL}" muted loop playsinline preload="metadata"${reduceMotion ? "" : " autoplay"}></video>`
-        : `<img src="${imageURL}" alt="" loading="lazy" />`;
-      const media = link
-        ? `<a class="work-media" href="${link}"${target} tabindex="-1" aria-hidden="true">${image}</a>`
-        : `<div class="work-media">${image}</div>`;
+      let media;
+      if (images && images.length) {
+        // images: [{ src, alt }, ...] -> auto-advancing carousel
+        const slides = images
+          .map(({ src, alt }, i) => `<img class="carousel-slide${i === 0 ? " is-active" : ""}" src="${src}" alt="${escapeHTML(alt || "")}" />`)
+          .join("");
+        const dots = images.length > 1
+          ? `<div class="carousel-dots">${images
+              .map((_, i) => `<button type="button" class="carousel-dot${i === 0 ? " is-active" : ""}" aria-label="Show image ${i + 1} of ${images.length}"></button>`)
+              .join("")}</div>`
+          : "";
+        media = `<div class="work-media carousel" aria-roledescription="carousel" aria-label="${escapeHTML(title)} photos">${slides}${dots}</div>`;
+      } else {
+        const image = videoURL
+          ? `<video src="${videoURL}" poster="${imageURL}" muted loop playsinline preload="metadata"${reduceMotion ? "" : " autoplay"}></video>`
+          : `<img src="${imageURL}" alt="" loading="lazy" />`;
+        media = link
+          ? `<a class="work-media" href="${link}"${target} tabindex="-1" aria-hidden="true">${image}</a>`
+          : `<div class="work-media">${image}</div>`;
+      }
       const heading = link
         ? `<a href="${link}"${target}>${escapeHTML(title)}</a>`
         : escapeHTML(title);
@@ -224,6 +244,36 @@ function renderTimeline(listId, items) {
       </li>`;
     })
     .join("");
+
+  list.querySelectorAll(".carousel").forEach(initCarousel);
+}
+
+function initCarousel(root) {
+  const slides = root.querySelectorAll(".carousel-slide");
+  const dots = root.querySelectorAll(".carousel-dot");
+  if (slides.length < 2) return;
+  let index = 0;
+  let timer = null;
+
+  const show = (next) => {
+    slides[index].classList.remove("is-active");
+    dots[index].classList.remove("is-active");
+    index = (next + slides.length) % slides.length;
+    slides[index].classList.add("is-active");
+    dots[index].classList.add("is-active");
+  };
+  const start = () => {
+    if (reduceMotion || timer) return;
+    timer = setInterval(() => show(index + 1), 3500);
+  };
+  const stop = () => { clearInterval(timer); timer = null; };
+
+  dots.forEach((dot, i) => dot.addEventListener("click", () => { show(i); stop(); start(); }));
+  root.addEventListener("mouseenter", stop);
+  root.addEventListener("mouseleave", start);
+  root.addEventListener("focusin", stop);
+  root.addEventListener("focusout", start);
+  start();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
