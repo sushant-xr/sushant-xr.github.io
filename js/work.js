@@ -27,13 +27,21 @@ const work = [
     newTab: false,
   },
   {
-    title: "Elixir Expedition: Embodied Agents in VR",
+    title: "Elixir Expedition: Exploring Action-Dependent Perception and Environmental Awareness in Immersive VR",
     date: "2023",
     context: "Virtual Environments · UT Austin",
-    description:
-      "A VR game built in Unity to support user studies on embodied agents, evaluating body ownership, presence, immersion, fear, and system usability (SUS).",
-    tags: ["Virtual Reality", "Unity", "Blender", "C#", "User Study"],
-    link: "/elixir-expedition.html",
+    description: [
+      "Elixir Expedition is an exploratory XR research project investigating how users perceive and respond to changes in immersive virtual environments. Developed as a four-person team project in Unity for Meta Quest 3, the experience explores **perceptual awareness, change blindness, and embodied interaction** within an interactive ancient Egyptian environment.",
+      "My primary contributions focused on **experimental design, VR prototype development, and performance optimization** for standalone VR hardware. I designed and implemented interaction mechanisms that connected participants' physical actions to environmental responses. For example, participants could illuminate their surroundings by bringing a burning torch into contact with a firepit and holding it there to ignite it.",
+      "The experience also incorporated **attention-dependent environmental transformations**. Using head orientation and proximity-based detection, the system introduced changes to objects and spatial layouts when participants looked away, allowing us to explore whether these alterations were subsequently noticed.",
+      "We conducted an exploratory study with **eight participants**, examining their awareness and recollection of environmental changes through post-experience feedback. While the small sample and limited surviving data constrain the findings, the project provided valuable experience in designing and evaluating interactive VR systems.",
+      "This work strengthened my interest in **perception-aware XR interfaces, embodied interaction, and adaptive virtual environments**.",
+    ],
+    tags: [
+      "Perceptual Awareness", "Change Blindness", "Embodied Interaction", "XR Interfaces",
+      "Unity", "C#", "Meta Quest 3", "XR Interaction Toolkit",
+    ],
+    link: "",
     imageURL: "media/thumbnails/elixir-youtube-square-poster.jpg",
     videoURL: "media/thumbnails/elixir-youtube-square.mp4",
     newTab: false,
