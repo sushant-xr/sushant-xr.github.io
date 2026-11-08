@@ -238,10 +238,17 @@ function renderTimeline(listId, items) {
              <button type="button" class="carousel-arrow carousel-next" aria-label="Next image"><span aria-hidden="true">›</span></button>`
           : "";
         media = `<div class="work-media carousel" aria-roledescription="carousel" aria-label="${escapeHTML(title)} photos">${slides}${arrows}${dots}</div>`;
+      } else if (videoURL) {
+        // Looping clip with pause/play and restart controls
+        media = `<div class="work-media has-video">
+            <video src="${videoURL}" poster="${imageURL}" muted loop playsinline preload="metadata"${reduceMotion ? "" : " autoplay"}></video>
+            <div class="video-controls">
+              <button type="button" class="video-btn video-toggle" aria-label="Pause video">${ICON_PAUSE}</button>
+              <button type="button" class="video-btn video-restart" aria-label="Restart video">${ICON_RESTART}</button>
+            </div>
+          </div>`;
       } else {
-        const image = videoURL
-          ? `<video src="${videoURL}" poster="${imageURL}" muted loop playsinline preload="metadata"${reduceMotion ? "" : " autoplay"}></video>`
-          : `<img src="${imageURL}" alt="" loading="lazy" />`;
+        const image = `<img src="${imageURL}" alt="" loading="lazy" />`;
         media = link
           ? `<a class="work-media" href="${link}"${target} tabindex="-1" aria-hidden="true">${image}</a>`
           : `<div class="work-media">${image}</div>`;
@@ -271,6 +278,36 @@ function renderTimeline(listId, items) {
     .join("");
 
   list.querySelectorAll(".carousel").forEach(initCarousel);
+  list.querySelectorAll(".has-video").forEach(initVideoControls);
+}
+
+const svgIcon = (path) =>
+  `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">${path}</svg>`;
+const ICON_PAUSE = svgIcon('<rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/>');
+const ICON_PLAY = svgIcon('<path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/>');
+const ICON_RESTART = svgIcon('<path d="M4 12a8 8 0 1 0 2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>');
+
+function initVideoControls(root) {
+  const video = root.querySelector("video");
+  const toggle = root.querySelector(".video-toggle");
+  const restart = root.querySelector(".video-restart");
+
+  // Keep the toggle's icon and label in sync with the video's actual state
+  const sync = () => {
+    const paused = video.paused;
+    toggle.innerHTML = paused ? ICON_PLAY : ICON_PAUSE;
+    toggle.setAttribute("aria-label", paused ? "Play video" : "Pause video");
+    root.classList.toggle("is-paused", paused);
+  };
+  video.addEventListener("play", sync);
+  video.addEventListener("pause", sync);
+  sync();
+
+  toggle.addEventListener("click", () => (video.paused ? video.play() : video.pause()));
+  restart.addEventListener("click", () => {
+    video.currentTime = 0;
+    video.play();
+  });
 }
 
 function initCarousel(root) {
