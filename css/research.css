@@ -425,6 +425,38 @@ a:focus-visible, .btn:focus-visible {
   }
 }
 
+/* ---------- Page loading screen ---------- */
+.page-loader {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+  /* Safety net: fades out on its own if the script never runs */
+  animation: loader-fallback 0.45s ease 4s forwards;
+}
+.page-loader.is-done { opacity: 0; visibility: hidden; }
+.page-loader-logo {
+  display: inline-flex; align-items: flex-end; gap: 6px;
+  font-family: var(--sans); font-weight: 700; font-size: 64px; line-height: 1;
+  color: var(--ink);
+}
+.page-loader-dot {
+  width: 14px; height: 14px; margin-bottom: 6px; border-radius: 50%;
+  background: var(--mark);
+  animation: loader-bounce 0.9s cubic-bezier(0.3, 0, 0.3, 1) infinite;
+}
+@keyframes loader-bounce {
+  0%, 100% { transform: translateY(0); }
+  45% { transform: translateY(-22px); }
+  60% { transform: translateY(0) scale(1.15, 0.85); }
+  70% { transform: translateY(0) scale(1); }
+}
+@keyframes loader-fallback { to { opacity: 0; visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) {
+  .page-loader-dot { animation: none; }
+  .page-loader { transition-duration: 0.2s; }
+}
+
 /* ---------- Side section navigation ---------- */
 .section-nav { display: none; }
 @media (min-width: 1100px) {

@@ -23,6 +23,10 @@
   </head>
 
   <body>
+    <!-- Loading screen: the "S." logo with a bouncing dot, removed on page load -->
+    <div class="page-loader" aria-hidden="true">
+      <span class="page-loader-logo">S<span class="page-loader-dot"></span></span>
+    </div>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="nav">
@@ -217,6 +221,27 @@
     <script src="js/work.js"></script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Hide the loading screen once the page has loaded: shown for at least
+      // 600ms so it doesn't flash, and never longer than 3s.
+      (() => {
+        const loader = document.querySelector(".page-loader");
+        if (!loader) return;
+        const shownAt = performance.now();
+        let done = false;
+        const hide = () => {
+          if (done) return;
+          done = true;
+          const wait = Math.max(0, 600 - (performance.now() - shownAt));
+          setTimeout(() => {
+            loader.classList.add("is-done");
+            loader.addEventListener("transitionend", () => loader.remove(), { once: true });
+          }, wait);
+        };
+        if (document.readyState === "complete") hide();
+        else window.addEventListener("load", hide, { once: true });
+        setTimeout(hide, 3000);
+      })();
 
       // Highlight the side-nav link for the section in the middle of the screen
       (() => {
