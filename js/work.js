@@ -70,15 +70,22 @@ const work = [
 
 const personal = [
   {
-    title: "Teleoperating a Robot Arm through VR",
+    title: "Robo-Barista: Automating My Morning Coffee",
     date: "2026",
     context: "Personal project",
     inProgress: true,
-    description:
-      "Controlling a 3D-printed, servo-driven robot arm from virtual reality. Details coming soon.",
-    tags: ["Virtual Reality", "Robotics", "Teleoperation"],
+    description: [
+      "I'm not much of a morning person, but I do love waking up to a fresh cup of coffee. So, naturally, I decided the most reasonable solution was to build a **6-axis robotic arm** and **automate my coffee maker** instead of spending two minutes making it myself.",
+      "The robotic arm is being developed to **remove used coffee pods and load fresh ones**, while a custom mechanical assembly handles the brewing mechanism. I designed a **3D-printed sector gear and stepper-driven pinion** to increase torque, allowing the machine to close its lid and puncture the coffee pod automatically.",
+      "To make the process more autonomous, I integrated a **non-contact water level sensor and pump** to maintain the reservoir, along with a **time-of-flight (ToF) sensor** to detect whether a cup is positioned correctly before brewing. An **ESP32 microcontroller** coordinates the sensors, motors, and mechanical components.",
+      "The entire system is designed to connect with **Alexa**, triggering a sequence of actions when I **dismiss my morning alarm**: refill the reservoir, replace the coffee pod, and start brewing.",
+      "It's a slightly overengineered solution to a very small problem, but that's half the fun of building things.",
+    ],
     link: "",
-    imageURL: "images/thumbnails/square/vr-robot-arm.jpg",
+    images: [
+      { src: "images/thumbnails/square/vr-robot-arm.jpg", alt: "3D-printed, servo-driven 6-axis robot arm held up on a desk in front of a monitor" },
+      { src: "images/projects/robot-arm/coffee-maker-lid.jpg", alt: "Single-serve coffee maker retrofitted with a stepper motor and 3D-printed sector gear that opens and closes its lid" },
+    ],
     newTab: false,
   },
   {
@@ -86,10 +93,11 @@ const personal = [
     date: "2026",
     context: "Personal project",
     description: [
-      "Most conventional Pomodoro timers interrupt you with an alarm the moment your focus session ends, even when you're fully immersed in a task. But what if the timer's purpose wasn't to tell you when to stop, but to help you get started?",
-      "That question inspired me to build the **Flow State Timer**, a hardware prototype that reimagines the Pomodoro technique as a tool for overcoming the initial resistance to starting a task rather than enforcing rigid work intervals.",
-      "Instead of interrupting your concentration, the timer quietly transitions into **Flow State mode** when the initial countdown ends, automatically counting upward and tracking the additional time spent working. No disruptive alarms, no forced breaks, just the freedom to continue until you're ready to stop.",
-      "Originally built to address my own frustrations with conventional productivity timers, the prototype has since become my **daily driver**, helping me build momentum, stay focused, and track the time I spend on meaningful work.",
+      "Getting started is usually the hardest part of any task. But once I'm finally focused and making progress, the last thing I want is a timer going off and telling me to take a break. Unfortunately, that's exactly what most Pomodoro timers do.",
+      "So I decided to build my own.",
+      "The idea is simple: use the timer to **overcome the initial resistance to starting a task**, not to interrupt the momentum once it's there. I built a small hardware timer that starts with a traditional **25-minute countdown**. Once the time is up, instead of sounding an alarm, it quietly switches to **Flow State mode**, counting upward and tracking how much longer I continue working.",
+      "The prototype uses an **ESP8266 microcontroller, an OLED display, capacitive touch controls, and a vibration motor** for subtle **haptic feedback**. It also **tracks time across different projects**, giving me a better picture of where my focused hours go.",
+      "What started as a small experiment to fix something that annoyed me has become my **daily driver**. It's a simple change to the Pomodoro technique, but one that fits the way I actually like to work.",
     ],
     link: "",
     images: [
@@ -107,10 +115,12 @@ const talks = [
     date: "Feb 2024",
     context: "Workshop · UT Austin · In collaboration with Bezi",
     description: [
-      "As a **Bezi Fellow**, I co-organized and facilitated a beginner-friendly XR workshop in collaboration with Bezi, a browser-based platform for designing and prototyping 3D and XR experiences, as part of a five-person team.",
-      "We chose **Bezi over Unity** for its accessibility, eliminating the need for software installation and allowing participants to explore XR through WebXR. Our team developed an interactive demo that participants could recreate during the workshop, introducing fundamental 3D design concepts and optimization techniques, including lossless texture optimization.",
-      "For many participants, this was their first exposure to XR technology. The most rewarding part was watching them transition from following instructions to experimenting with their own creative ideas through hands-on prototyping.",
-      "We concluded the workshop by sharing a comprehensive Notion resource with tutorials and learning materials, enabling participants to continue exploring XR development independently, even without owning a VR headset.",
+      "Getting started with XR development can be intimidating, especially when your first steps involve installing a game engine, configuring a development environment, and figuring out where to begin. We wanted to make that first experience a little less overwhelming and a lot more fun.",
+      "As a **Bezi Fellow**, I worked with a team of five to organize and facilitate a **beginner-friendly XR workshop** in collaboration with Bezi, a **browser-based platform** for designing and prototyping 3D and XR experiences.",
+      "We deliberately chose **Bezi over Unity** to lower the barrier to entry. No complicated installations, no expensive hardware requirements, just a browser and a willingness to experiment. Our team built an **interactive demo** that participants could recreate during the session, introducing **3D interaction design, WebXR, and practical optimization techniques**, including lossless texture optimization.",
+      "For many attendees, this was their **first hands-on experience with XR**. My favorite part was watching participants move beyond the tutorial and start experimenting with their own ideas, turning a guided exercise into something uniquely theirs.",
+      "We wrapped up by sharing a **Notion learning resource** with tutorials, references, and materials to help everyone continue building XR experiences independently, even without a VR headset.",
+      "The goal wasn't just to teach a tool. It was to make XR feel like something anyone could start creating.",
     ],
     tags: ["Mixed Reality", "Bezi", "Figma", "Meta Quest"],
     link: "",
