@@ -12,16 +12,16 @@
 //   link:        leave empty ("") if there's no page yet; the button is hidden
 const work = [
   {
-    title: "Phantom Touch: Designing a Multimodal Wearable Interface for Immersive VR",
+    title: "Phantom Touch: Feeling the Virtual Without Losing Touch With the Physical",
     date: "2026",
     context: "Independent research project",
     inProgress: true,
     description: [
-      "Phantom Touch is an independent XR research project exploring how **wearable haptic interfaces can translate virtual interactions into physical sensations** while preserving natural interactions with the physical world. The design positions actuators on the backs of the fingers, leaving the **fingerpads exposed** for direct physical contact.",
-      "Informed by prior research on **fingernail haptics, finger-worn tactile interfaces (Haplets), and virtual texture synthesis (Hasti)**, the project investigates how hand tracking, actuator placement, and tactile rendering influence the perception of virtual surfaces.",
-      "**Phase 1 (In Progress)** focuses on establishing a low-latency communication pipeline between Meta Quest 3, Unity, and wearable hardware. A virtual keyboard detects finger-specific touch events and transmits compact binary data through a **real-time telemetry stream** to dedicated haptic middleware. The middleware forwards commands via **Bluetooth Low Energy (BLE) to individual ESP32-S3 modules**, which control low-cost **ERM vibration motors mounted at the finger end-effectors**.",
-      "**Phase 2** will investigate **movement-dependent texture rendering**, translating UV-indexed height and roughness maps into dynamic haptic patterns using **linear resonant actuators (LRAs)**. Their faster response and more precise vibration control make them better suited for rendering closely spaced tactile events. Planned experiments will explore the **perceptual limits of tactile fidelity**, identifying how surface detail, finger movement, and tracking accuracy affect users' ability to distinguish virtual textures.",
-      "Future directions include **Peltier-based thermal feedback** and specialist-supervised **electrical muscle stimulation (EMS)** to simulate recoil and resistance at virtual interaction boundaries.",
+      "What if you could feel virtual surfaces without losing the ability to interact with the physical world? That's the idea behind Phantom Touch, an independent XR research project exploring **wearable haptics and tactile perception**. The interface places **actuators on the backs of the fingers**, keeping the **fingerpads exposed** for everyday physical interactions.",
+      "Building on research in **fingernail haptics, wearable tactile interfaces (Haplets), and virtual texture synthesis (Hasti)**, I'm investigating how hand tracking, actuator placement, and hardware limitations affect our perception of virtual surfaces.",
+      "**Phase 1 (In Progress)** focuses on getting the fundamentals right: establishing a **low-latency communication pipeline** between Unity, Meta Quest 3, and the wearable hardware. A virtual keyboard captures finger-specific touch events and streams **compact binary telemetry** to custom haptic middleware, which relays commands via **Bluetooth Low Energy (BLE) to ESP32-S3 modules** controlling low-cost **ERM vibration motors** at the finger end-effectors.",
+      "**Phase 2** takes this further by exploring **movement-dependent texture rendering** using UV-indexed height and roughness maps. I'll replace ERMs with faster-responding **linear resonant actuators (LRAs)** to generate more precisely timed tactile patterns and investigate the **perceptual limits of surface fidelity**: how much texture detail can we actually distinguish before finer differences become imperceptible?",
+      "Future explorations include **Peltier-based thermal feedback** and specialist-supervised **electrical muscle stimulation (EMS)** for simulating recoil and resistance at virtual boundaries.",
     ],
     tags: [
       "Wearable Haptics", "Multimodal Interaction", "Tactile Perception", "XR Interfaces",
@@ -32,15 +32,15 @@ const work = [
     newTab: false,
   },
   {
-    title: "Elixir Expedition: Exploring Action-Dependent Perception and Environmental Awareness in Immersive VR",
+    title: "Elixir Expedition: Exploring Perception and Environmental Awareness in Immersive VR",
     date: "2023",
     context: "Virtual Environments · UT Austin",
     description: [
-      "Elixir Expedition is an exploratory XR research project investigating how users perceive and respond to changes in immersive virtual environments. Developed as a four-person team project in Unity for Meta Quest 3, the experience explores **perceptual awareness, change blindness, and embodied interaction** within an interactive ancient Egyptian environment.",
-      "My primary contributions focused on **experimental design, VR prototype development, and performance optimization** for standalone VR hardware. I designed and implemented interaction mechanisms that connected participants' physical actions to environmental responses. For example, participants could illuminate their surroundings by bringing a burning torch into contact with a firepit and holding it there to ignite it.",
-      "The experience also incorporated **attention-dependent environmental transformations**. Using head orientation and proximity-based detection, the system introduced changes to objects and spatial layouts when participants looked away, allowing us to explore whether these alterations were subsequently noticed.",
-      "We conducted an exploratory study with **eight participants**, examining their awareness and recollection of environmental changes through post-experience feedback. While the small sample and limited surviving data constrain the findings, the project provided valuable experience in designing and evaluating interactive VR systems.",
-      "This work strengthened my interest in **perception-aware XR interfaces, embodied interaction, and adaptive virtual environments**.",
+      "How much of a virtual world do we actually notice, and what happens when that world changes while we're not looking? These questions inspired **Elixir Expedition**, an exploratory XR research project investigating **change blindness, perceptual awareness, and embodied interaction** within an immersive ancient Egyptian environment.",
+      "Developed as a **four-person team project** using Unity and Meta Quest 3, the experience combined physical interactions with subtle environmental transformations. My primary contributions focused on **experimental design, VR prototype development, and performance optimization** for standalone VR hardware.",
+      "I designed interaction mechanisms that connected participants' actions to environmental responses. For example, players could illuminate dark spaces by holding a burning torch against a firepit. Meanwhile, the environment could change without their immediate awareness. Using **head orientation and proximity-based detection**, the system altered objects and spatial layouts when participants looked away, allowing us to explore whether they noticed these changes upon returning.",
+      "We conducted an **exploratory study with eight participants**, examining their awareness and recollection of environmental changes through post-experience feedback. While the small sample and limited surviving data prevent definitive conclusions, the project offered practical experience in designing and evaluating perception-driven VR interactions.",
+      "This experience sparked my interest in **perception-aware XR interfaces** and how virtual environments might adapt to human behavior.",
     ],
     tags: [
       "Perceptual Awareness", "Change Blindness", "Embodied Interaction", "XR Interfaces",
@@ -52,15 +52,18 @@ const work = [
     newTab: false,
   },
   {
-    title: "Solar-Assisted Smartphone Charging Case",
+    title: "Solar-Assisted Smartphone Charging Case: Making the Most of Every Bit of Sunlight",
     date: "2018",
     context: "Engineering case study · Undergraduate",
     description: [
-      "Solar-powered calculators have existed for decades, so why couldn't we use the same principle to extend a smartphone's battery life? This question inspired us to develop an **Arduino-based solar charging case** that could harvest ambient light and supplement a smartphone's battery. We iterated through multiple hardware and enclosure designs, balancing energy-harvesting efficiency, portability, and the challenge of maintaining a slim form factor.",
-      "The system uses **solar panels to harvest energy from available light**, including low-intensity ambient light under suitable conditions. An **energy-harvesting circuit** manages the collected power and stores it in an array of supercapacitors, which act as temporary energy buffers. A regulated boost and charging circuit then transfers the accumulated energy to the case's rechargeable battery. We also developed a companion **Android application** to control charging, allowing users to limit the phone's charge to approximately 80% to help reduce battery degradation.",
-      "I co-developed this prototype with a business school colleague, combining hardware prototyping, embedded systems, mobile application development, and product design. We registered the project as a startup venture through our undergraduate university's **Technology Business Incubation Center**, where we received mentorship and research funding under the **Make in India** initiative.",
+      "Solar-powered calculators have been around for decades, quietly running on whatever light they can get. So we wondered, **why couldn't we use the same idea to give smartphones a little extra battery life?**",
+      "That question led us to develop a **solar-assisted smartphone charging case**, exploring whether we could harvest enough energy from everyday light exposure to supplement a phone's battery without turning its case into a bulky power bank.",
+      "We experimented with several hardware configurations and enclosure designs, trying to balance **energy efficiency, portability, and a slim form factor**. The system uses small solar panels to collect energy from sunlight and suitable ambient lighting conditions. An **energy-harvesting circuit** stores the collected energy in an array of supercapacitors before transferring it through a regulated charging circuit to a rechargeable battery.",
+      "We also built a companion **Android application** to manage charging behavior, including the ability to set a charging limit of approximately 80% to help reduce long-term battery wear.",
+      "I developed the prototype alongside a business school colleague, combining **electronics, Arduino-based prototyping, mobile development, and product design**. We eventually registered the project as a startup venture through our university's **Technology Business Incubation Center**, receiving mentorship and research funding through the **Make in India initiative**.",
+      "It was our first real attempt at turning a simple \"what if?\" into a physical product, and a crash course in how much engineering goes into making something small, practical, and genuinely useful.",
     ],
-    tags: ["Arduino", "Hardware Prototyping", "Energy Harvesting", "Android"],
+    tags: ["Arduino", "Solar Energy Harvesting", "Supercapacitors", "Android", "Hardware Prototyping", "Product Design"],
     link: "",
     imageURL: "media/thumbnails/smart-mod-square-poster.jpg",
     videoURL: "media/thumbnails/smart-mod-square.mp4",
