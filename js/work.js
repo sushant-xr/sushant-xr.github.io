@@ -163,27 +163,19 @@ const prototypes = [
     newTab: false,
   },
   {
-    title: "Flows: No-Code Editor for Data Transformation",
+    title: "Clarista: Building a No-Code Data Platform",
     date: "2020–2022",
     context: "Frontend Lead · Clarista Inc.",
-    description:
-      "Played a central role in creating the initial prototype and leading the front-end team for a drag-and-drop platform that lets data teams merge, split, and filter data without writing code.",
-    tags: ["React", "Design Systems", "Rapid Prototyping"],
-    link: "/no-code-editor.html",
-    imageURL: "media/thumbnails/flows-square-poster.jpg",
-    videoURL: "media/thumbnails/flows-square.mp4",
-    newTab: false,
-  },
-  {
-    title: "Dashboard Builder for Realtime Analytics",
-    date: "2020–2022",
-    context: "Proof of concept · Clarista Inc.",
-    description:
-      "Led the proof of concept for dragging and dropping charts onto a canvas, with consistent layouts, customization options, and real-time dashboard publishing.",
-    tags: ["React", "Data Visualization", "Proof of Concept"],
+    description: [
+      "Working with large datasets shouldn't always require writing complex SQL queries or navigating complicated tools. At Clarista, I **led the frontend team** building a **no-code data platform** designed to make data transformation, exploration, and visualization more intuitive and accessible.",
+      "One of our core deliverables was **Flows**, a **visual data transformation editor** built using **React, Redux, and D3.js**. The interface enabled users to build transformation pipelines through an interactive **drag-and-drop canvas**, connecting operations to merge, filter, split, and manipulate datasets without writing code.",
+      "Our work extended across several interconnected modules, including **data cataloging, data lineage visualization, and a real-time analytics dashboard builder**. The dashboard builder allowed users to arrange and customize charts on a visual canvas and publish interactive dashboards, bringing data exploration and reporting into the same platform.",
+      "Beyond development, I was responsible for **frontend architecture, technical decision-making, rapid prototyping**, and coordinating the team's deliverables. I also led the development of a **reusable design system**, collaborating with designers and backend engineers to maintain consistent interactions across modules.",
+    ],
+    tags: ["React", "Redux", "D3.js", "Design Systems", "Data Visualization", "Rapid Prototyping"],
     link: "",
-    imageURL: "media/thumbnails/dashboard-square-poster.jpg",
-    videoURL: "media/thumbnails/dashboard-square.mp4",
+    imageURL: "media/thumbnails/clarista-square-poster.jpg",
+    videoURL: "media/thumbnails/clarista-square.mp4",
     newTab: false,
   },
 ];
