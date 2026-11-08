@@ -240,6 +240,11 @@
           if (el) observer.observe(el);
         });
         setActive("home-section");
+
+        // Briefly reveal the labels on load so visitors notice the menu
+        const nav = document.querySelector(".section-nav");
+        nav.classList.add("is-peek");
+        setTimeout(() => nav.classList.remove("is-peek"), 3000);
       })();
     </script>
     <script type="module">
