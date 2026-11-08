@@ -60,7 +60,7 @@
             <ul class="nav-links">
               <li><a href="index.html" aria-current="page">Home</a></li>
               <li>
-                <a href="/resume/Resume - Sushant Kamble.pdf" target="_blank" rel="noopener">CV</a>
+                <a href="/resume/Sushant_Kamble_CV.pdf" target="_blank" rel="noopener">CV</a>
               </li>
               <li><a href="mailto:sushantkamble.xr@gmail.com">Email</a></li>
             </ul>
@@ -98,7 +98,7 @@
             <p class="hero-role">Rethinking How We Interact with Virtual Worlds.</p>
 
             <div class="hero-links">
-              <a class="btn btn-primary" href="/resume/Resume - Sushant Kamble.pdf" target="_blank" rel="noopener" download>Download CV</a>
+              <a class="btn btn-primary" href="/resume/Sushant_Kamble_CV.pdf" target="_blank" rel="noopener" download>Download CV</a>
               <a class="btn btn-ghost" href="mailto:sushantkamble.xr@gmail.com">Email me</a>
             </div>
           </div>
@@ -231,7 +231,7 @@
             with virtual worlds, I'd love to connect!</strong>
           </p>
           <div class="hero-links">
-            <a class="btn btn-primary" href="/resume/Resume - Sushant Kamble.pdf" target="_blank" rel="noopener" download>Download CV</a>
+            <a class="btn btn-primary" href="/resume/Sushant_Kamble_CV.pdf" target="_blank" rel="noopener" download>Download CV</a>
             <a class="btn btn-ghost" href="mailto:sushantkamble.xr@gmail.com">Email me</a>
           </div>
         </div>
@@ -249,6 +249,8 @@
         <li><a href="#contact"><span class="section-nav-label">Contact</span></a></li>
       </ul>
     </nav>
+
+    <div class="toast" role="status" aria-live="polite"></div>
 
     <button type="button" class="back-to-top" aria-label="Back to top">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -355,6 +357,31 @@
           applyThemeLabel();
         });
         applyThemeLabel();
+      })();
+
+      // Email links: copy the address and confirm with a small popup instead of
+      // opening a mail app (many visitors have none set up). If copying is not
+      // possible, the link falls back to opening the mail app as before.
+      (() => {
+        const toast = document.querySelector(".toast");
+        let hideTimer;
+        const show = (msg) => {
+          toast.textContent = msg;
+          toast.classList.add("is-visible");
+          clearTimeout(hideTimer);
+          hideTimer = setTimeout(() => toast.classList.remove("is-visible"), 2600);
+        };
+        document.querySelectorAll('a[href^="mailto:"]').forEach((link) => {
+          link.addEventListener("click", (e) => {
+            if (!navigator.clipboard || !window.isSecureContext) return;
+            e.preventDefault();
+            const address = link.getAttribute("href").replace("mailto:", "");
+            navigator.clipboard.writeText(address).then(
+              () => show(address + " copied to clipboard"),
+              () => { window.location.href = link.href; }
+            );
+          });
+        });
       })();
 
       // Back-to-top button: appears after scrolling about a screen down
