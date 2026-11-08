@@ -193,6 +193,18 @@
       </section>
     </main>
 
+    <!-- Side navigation: jump between sections (wide screens only) -->
+    <nav class="section-nav" aria-label="Page sections">
+      <ul>
+        <li><a href="#home-section"><span class="section-nav-label">About</span></a></li>
+        <li><a href="#portfolio-section"><span class="section-nav-label">Research</span></a></li>
+        <li><a href="#talks"><span class="section-nav-label">Talks</span></a></li>
+        <li><a href="#web-prototypes"><span class="section-nav-label">Industry</span></a></li>
+        <li><a href="#personal-projects"><span class="section-nav-label">Personal</span></a></li>
+        <li><a href="#contact"><span class="section-nav-label">Contact</span></a></li>
+      </ul>
+    </nav>
+
     <footer class="footer">
       <div class="container">
         <span>© <span id="year"></span> Sushant Kamble</span>
@@ -203,6 +215,30 @@
     <script src="js/work.js"></script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Highlight the side-nav link for the section in the middle of the screen
+      (() => {
+        const links = [...document.querySelectorAll(".section-nav a")];
+        const byId = new Map(links.map((a) => [a.getAttribute("href").slice(1), a]));
+        const setActive = (id) =>
+          links.forEach((a) => {
+            const on = a === byId.get(id);
+            a.classList.toggle("is-active", on);
+            if (on) a.setAttribute("aria-current", "true");
+            else a.removeAttribute("aria-current");
+          });
+        // Sections without their own link count toward the one before them
+        const alias = { "intro-section": "home-section" };
+        const observer = new IntersectionObserver(
+          (entries) => entries.forEach((e) => e.isIntersecting && setActive(alias[e.target.id] || e.target.id)),
+          { rootMargin: "-45% 0px -50% 0px" }
+        );
+        [...byId.keys(), ...Object.keys(alias)].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) observer.observe(el);
+        });
+        setActive("home-section");
+      })();
     </script>
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";

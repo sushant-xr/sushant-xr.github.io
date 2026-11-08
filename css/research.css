@@ -409,6 +409,44 @@ a:focus-visible, .btn:focus-visible {
   }
 }
 
+/* ---------- Side section navigation ---------- */
+.section-nav { display: none; }
+@media (min-width: 1100px) {
+  .section-nav {
+    display: block; position: fixed; z-index: 40;
+    right: 20px; top: 50%; transform: translateY(-50%);
+  }
+  .section-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .section-nav a {
+    display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+    padding: 6px 0; color: var(--ink-3); text-decoration: none;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  /* The dot */
+  .section-nav a::after {
+    content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rule); transition: background 0.2s, transform 0.2s;
+  }
+  .section-nav a:hover::after, .section-nav a:focus-visible::after { background: var(--mark); }
+  .section-nav a.is-active { color: var(--accent); }
+  .section-nav a.is-active::after { background: var(--accent); transform: scale(1.4); }
+  /* Labels appear on hover/focus; always shown when there's room */
+  .section-nav-label {
+    opacity: 0; transform: translateX(6px);
+    transition: opacity 0.2s, transform 0.2s;
+    background: rgba(255, 255, 255, 0.92); padding: 1px 6px; border-radius: 4px;
+  }
+  .section-nav:hover .section-nav-label,
+  .section-nav a:focus-visible .section-nav-label { opacity: 1; transform: none; }
+}
+@media (min-width: 1500px) {
+  .section-nav { right: 32px; }
+  .section-nav-label { opacity: 1; transform: none; background: none; padding: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-nav a::after, .section-nav-label { transition: none; }
+}
+
 .section-divided { border-top: 1px solid var(--line); }
 @media (max-width: 420px) {
   .nav-brand { font-size: 24px; }
