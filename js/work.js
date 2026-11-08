@@ -12,17 +12,22 @@
 //   link:        leave empty ("") if there's no page yet; the button is hidden
 const work = [
   {
-    title: "Phantom Touch: A Multimodal Wearable Interface for VR",
-    date: "Nov 2026",
+    title: "Phantom Touch: Designing a Multimodal Wearable Interface for Immersive VR",
+    date: "2026",
     context: "Independent research project",
     inProgress: true,
     description: [
-      "Phantom Touch is a **wearable interface prototype** exploring how virtual interactions can produce physical sensations while keeping the **fingerpads free** for direct contact with the real world. The proposed design places actuators on the **nails or backs of the fingers**, with electronics at the wrist. Using **Meta Quest hand tracking**, it aims to let users feel virtual interactions while remaining able to handle physical objects without removing the wearable.",
-      "The first phase, now complete, used inexpensive vibration motors, **ESP32 electronics**, and a small **Unity keyboard demonstration** to establish reliable communication between virtual events and individual fingers. This first stage provides the foundation for the central research direction: translating **UV-indexed height and roughness maps** into **movement-dependent tactile feedback** using **linear resonant actuators**. Planned experiments will investigate how tracking uncertainty, finger movement, and actuator response affect the surface features users can distinguish.",
-      "Informed by research in wearable haptics and texture rendering, Phantom Touch is being designed as an **extensible platform for multisensory VR interaction**. Phase 3 will explore specialist-supervised **electrical muscle stimulation** to simulate recoil at the wrist for FPS shooters, and longer-term directions include **thermal feedback**. The prototype is currently in development, with planned evaluations of texture perception, comfort, and the ability to transition between physical and virtual interactions.",
+      "Phantom Touch is an independent XR research project exploring how **wearable haptic interfaces can translate virtual interactions into physical sensations** while preserving natural interactions with the physical world. The design positions actuators on the backs of the fingers, leaving the **fingerpads exposed** for direct physical contact.",
+      "Informed by prior research on **fingernail haptics, finger-worn tactile interfaces (Haplets), and virtual texture synthesis (Hasti)**, the project investigates how hand tracking, actuator placement, and tactile rendering influence the perception of virtual surfaces.",
+      "**Phase 1 (In Progress)** focuses on establishing a low-latency communication pipeline between Meta Quest 3, Unity, and wearable hardware. A virtual keyboard detects finger-specific touch events and transmits compact binary data through a **real-time telemetry stream** to dedicated haptic middleware. The middleware forwards commands via **Bluetooth Low Energy (BLE) to individual ESP32-S3 modules**, which control low-cost **ERM vibration motors mounted at the finger end-effectors**.",
+      "**Phase 2** will investigate **movement-dependent texture rendering**, translating UV-indexed height and roughness maps into dynamic haptic patterns using **linear resonant actuators (LRAs)**. Their faster response and more precise vibration control make them better suited for rendering closely spaced tactile events. Planned experiments will explore the **perceptual limits of tactile fidelity**, identifying how surface detail, finger movement, and tracking accuracy affect users' ability to distinguish virtual textures.",
+      "Future directions include **Peltier-based thermal feedback** and specialist-supervised **electrical muscle stimulation (EMS)** to simulate recoil and resistance at virtual interaction boundaries.",
     ],
-    tags: ["Haptics", "Wearables", "Meta Quest 3", "Unity", "ESP32"],
-    link: "/phantom-touch.html",
+    tags: [
+      "Wearable Haptics", "Multimodal Interaction", "Tactile Perception", "XR Interfaces",
+      "Unity", "C#", "Meta Quest 3", "ESP32-S3", "BLE", "DRV2605L", "ERM/LRA Actuators",
+    ],
+    link: "",
     imageURL: "images/thumbnails/square/wristband-placeholder.svg",
     newTab: false,
   },
