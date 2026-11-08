@@ -18,6 +18,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/research.css" />
+    <script>
+      // Enable the sequential reveal only when JS runs and motion is welcome,
+      // so content is never hidden otherwise
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("js-reveal");
+      }
+    </script>
 
     <title>Sushant Kamble | XR Researcher</title>
   </head>
@@ -236,11 +243,66 @@
           setTimeout(() => {
             loader.classList.add("is-done");
             loader.addEventListener("transitionend", () => loader.remove(), { once: true });
+            window.dispatchEvent(new Event("loader:done"));
           }, wait);
         };
         if (document.readyState === "complete") hide();
         else window.addEventListener("load", hide, { once: true });
         setTimeout(hide, 3000);
+      })();
+
+      // Sequential reveal: the hero builds in piece by piece once the loading
+      // screen lifts; everything below fades up as it scrolls into view.
+      (() => {
+        if (!document.documentElement.classList.contains("js-reveal")) return;
+        // Mark a group's pieces in order; --i sets each piece's delay step
+        const mark = (els) =>
+          [...els].forEach((el, i) => {
+            el.setAttribute("data-reveal", "");
+            el.style.setProperty("--i", i);
+          });
+        const show = (els) => els.forEach((el) => el.classList.add("is-visible"));
+
+        // Hero + intro: one ordered sequence, started once the loader has fully faded
+        const heroSeq = [
+          ...document.querySelectorAll(
+            ".hero-photo, .hero-text .eyebrow, .hero-text h1, .hero-text .hero-role, .hero-text .hero-links, .intro .hero-bio"
+          ),
+        ];
+        mark(heroSeq);
+        const startHero = () => show(heroSeq);
+        if (document.querySelector(".page-loader")) {
+          window.addEventListener("loader:done", () => setTimeout(startHero, 350), { once: true });
+        } else startHero();
+
+        // Below the fold: each group reveals its pieces in order as it scrolls
+        // into view (runs after js/work.js renders the lists)
+        document.addEventListener("DOMContentLoaded", () => {
+          const groups = new Map(); // container to observe -> its ordered pieces
+          document.querySelectorAll(".section-head").forEach((head) => groups.set(head, [...head.children]));
+          document.querySelectorAll(".work-item").forEach((item) =>
+            groups.set(item, [
+              item.querySelector(".work-media"),
+              ...item.querySelectorAll(".work-body > *"),
+            ].filter(Boolean))
+          );
+          const collab = document.querySelector(".collab .container");
+          if (collab) groups.set(collab, [...collab.children]);
+          const contact = document.querySelector(".contact .container");
+          if (contact) groups.set(contact, [...contact.children]);
+
+          groups.forEach((pieces) => mark(pieces));
+          const io = new IntersectionObserver(
+            (entries) =>
+              entries.forEach((e) => {
+                if (!e.isIntersecting) return;
+                show(groups.get(e.target));
+                io.unobserve(e.target);
+              }),
+            { rootMargin: "0px 0px -15% 0px" }
+          );
+          groups.forEach((_, container) => io.observe(container));
+        });
       })();
 
       // Highlight the side-nav link for the section in the middle of the screen

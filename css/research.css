@@ -457,6 +457,17 @@ a:focus-visible, .btn:focus-visible {
   .page-loader { transition-duration: 0.2s; }
 }
 
+/* ---------- Sequential content reveal ---------- */
+/* .js-reveal is only set when JS runs and reduced motion is off */
+.js-reveal [data-reveal] {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.js-reveal [data-reveal].is-visible {
+  opacity: 1; transform: none;
+  transition-delay: calc(var(--i, 0) * 180ms);
+}
+
 /* ---------- Side section navigation ---------- */
 .section-nav { display: none; }
 @media (min-width: 1100px) {
