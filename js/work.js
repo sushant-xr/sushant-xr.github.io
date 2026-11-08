@@ -153,11 +153,19 @@ const talks = [
 // instead of imageURL; imageURL is then used as the poster frame.
 const prototypes = [
   {
-    title: "Beheld Caller App",
+    title: "Beheld Health: Building Technology for Human-Centered Care",
     date: "2024–Present",
-    context: "UX Engineer · Beheld Health Inc.",
-    description: "Details coming soon.",
-    tags: [],
+    context: "Frontend & UX Engineer · Beheld Health Inc.",
+    description: [
+      "Healthcare is complicated enough without making the people delivering care struggle with the technology meant to support them. At Beheld Health, a healthcare startup originating from **UT Austin's Dell Medical School**, I've been working on making that experience a little easier.",
+      "As the Frontend and UX Engineer, I **lead the design, development, and maintenance** of a **React Native mobile application** that helps healthcare outreach teams connect with participants, manage their daily workflows, and document interactions.",
+      "One of my key contributions was designing a **smart scheduling and task-management interface** that helps callers prioritize outreach, organize follow-ups, and keep track of participant engagement. I also developed **integrated communication features using Twilio**, enabling voice calls, SMS, multimedia messaging, and notifications directly within the application.",
+      "Beyond individual features, I've been responsible for **frontend architecture, reusable UI components, performance optimization, analytics, and CI/CD pipelines** supporting both iOS and Android.",
+    ],
+    tags: [
+      "Human-Computer Interaction", "UX Engineering", "Mobile Development", "Healthcare Technology",
+      "React Native", "TypeScript", "Expo", "Twilio", "Node.js", "AWS", "Sentry",
+    ],
     link: "",
     imageURL: "images/thumbnails/square/beheld-placeholder.svg",
     newTab: false,
@@ -172,7 +180,10 @@ const prototypes = [
       "Our work extended across several interconnected modules, including **data cataloging, data lineage visualization, and a real-time analytics dashboard builder**. The dashboard builder allowed users to arrange and customize charts on a visual canvas and publish interactive dashboards, bringing data exploration and reporting into the same platform.",
       "Beyond development, I was responsible for **frontend architecture, technical decision-making, rapid prototyping**, and coordinating the team's deliverables. I also led the development of a **reusable design system**, collaborating with designers and backend engineers to maintain consistent interactions across modules.",
     ],
-    tags: ["React", "Redux", "D3.js", "Design Systems", "Data Visualization", "Rapid Prototyping"],
+    tags: [
+      "Interaction Design", "Data Visualization", "Frontend Leadership", "Design Systems",
+      "React", "Redux", "D3.js", "JavaScript", "REST APIs",
+    ],
     link: "",
     imageURL: "media/thumbnails/clarista-square-poster.jpg",
     videoURL: "media/thumbnails/clarista-square.mp4",
