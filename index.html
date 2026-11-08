@@ -109,6 +109,9 @@
               new forms of XR interaction. My goal is to make immersive experiences
               more <strong>intuitive, natural, and accessible</strong>.
             </p>
+            <a class="scroll-cue" href="#portfolio-section" aria-label="Scroll to Research &amp; Prototyping">
+              <span class="scroll-cue-mouse" aria-hidden="true"><span class="scroll-cue-wheel"></span></span>
+            </a>
         </div>
       </section>
 
@@ -251,6 +254,15 @@
         setTimeout(hide, 3000);
       })();
 
+      // Hide the scroll cue once the visitor scrolls down; bring it back at the top
+      (() => {
+        const cue = document.querySelector(".scroll-cue");
+        if (!cue) return;
+        const update = () => cue.classList.toggle("is-hidden", window.scrollY > 120);
+        window.addEventListener("scroll", update, { passive: true });
+        update();
+      })();
+
       // Sequential reveal: the hero builds in piece by piece once the loading
       // screen lifts; everything below fades up as it scrolls into view.
       (() => {
@@ -266,7 +278,7 @@
         // Hero + intro: one ordered sequence, started once the loader has fully faded
         const heroSeq = [
           ...document.querySelectorAll(
-            ".hero-photo, .hero-text .eyebrow, .hero-text h1, .hero-text .hero-role, .hero-text .hero-links, .intro .hero-bio"
+            ".hero-photo, .hero-text .eyebrow, .hero-text h1, .hero-text .hero-role, .hero-text .hero-links, .intro .hero-bio, .intro .scroll-cue"
           ),
         ];
         mark(heroSeq);
