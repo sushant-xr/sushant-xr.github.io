@@ -32,7 +32,7 @@
   --bg: #15110e;
   --bg-soft: #1f1915;
   --ink: #f3ece6;
-  --ink-2: #d2c6bc;
+  --ink-2: #bcafa4;
   --ink-3: #a99a8e;
   --line: #3a312a;
   --accent: #f0893a;
@@ -52,7 +52,7 @@
     --bg: #15110e;
     --bg-soft: #1f1915;
     --ink: #f3ece6;
-    --ink-2: #d2c6bc;
+    --ink-2: #bcafa4;
     --ink-3: #a99a8e;
     --line: #3a312a;
     --accent: #f0893a;
@@ -70,6 +70,9 @@
 }
 
 * { box-sizing: border-box; }
+
+/* Bold text uses the strongest ink so it stands out from body copy in both themes */
+strong, b { color: var(--ink); font-weight: 600; }
 
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
