@@ -339,6 +339,10 @@ a:focus-visible, .btn:focus-visible {
 .work-desc { color: var(--ink-2); margin: 0 0 14px; text-align: justify; hyphens: auto; }
 .work-desc + .work-desc { margin-top: -4px; }
 .work-desc strong { color: var(--ink); font-weight: 600; }
+/* Inline links in descriptions (e.g. cited papers): always underlined so they read as links */
+.work-desc a { text-decoration: underline; text-decoration-color: var(--hover-line); text-underline-offset: 3px; }
+.work-desc a:hover { text-decoration-color: currentColor; }
+.work-desc a strong { color: inherit; }
 
 /* ---------- Image carousel (timeline thumbnail) ---------- */
 .work-media.carousel { position: relative; aspect-ratio: 1 / 1; }

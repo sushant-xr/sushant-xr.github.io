@@ -7,7 +7,8 @@
 //   date:        label shown in the timeline (e.g. "Feb 2024")
 //   subtitle:    optional line shown under the title
 //   description: text shown under the title; use an array for several
-//                paragraphs, and **double asterisks** for bold
+//                paragraphs, **double asterisks** for bold, and
+//                [label](https://url) for a link that opens in a new tab
 //   newTab:      true for external links (e.g. GitHub)
 //   inProgress:  true shows an "In progress" label
 //   link:        leave empty ("") if there's no page yet; the button is hidden
@@ -19,10 +20,11 @@ const work = [
     inProgress: true,
     description: [
       "What if you could feel virtual surfaces without losing the ability to interact with the physical world? That's the idea behind Phantom Touch, an independent XR research project exploring **wearable haptics and tactile perception**. The interface places **actuators on the backs of the fingers**, keeping the **fingerpads exposed** for everyday physical interactions.",
-      "Building on research in **fingernail haptics, wearable tactile interfaces (Haplets), and virtual texture synthesis (Hasti)**, I'm investigating how hand tracking, actuator placement, and hardware limitations affect our perception of virtual surfaces.",
-      "**Phase 1 (In Progress)** focuses on getting the fundamentals right: establishing a **low-latency communication pipeline** between Unity, Meta Quest 3, and the wearable hardware. A virtual keyboard captures finger-specific touch events and streams **compact binary telemetry** to custom haptic middleware, which relays commands via **Bluetooth Low Energy (BLE) to ESP32-S3 modules** controlling low-cost **ERM vibration motors** at the finger end-effectors.",
-      "**Phase 2** takes this further by exploring **movement-dependent texture rendering** using UV-indexed height and roughness maps. I'll replace ERMs with faster-responding **linear resonant actuators (LRAs)** to generate more precisely timed tactile patterns and investigate the **perceptual limits of surface fidelity**: how much texture detail can we actually distinguish before finer differences become imperceptible?",
-      "Future explorations include **Peltier-based thermal feedback** and specialist-supervised **electrical muscle stimulation (EMS)** for simulating recoil and resistance at virtual boundaries.",
+      "I began by reviewing existing research to understand current approaches and identify opportunities for further investigation. [**Haplets (2021)**](https://doi.org/10.3389/frvir.2021.738613) demonstrated wireless finger-worn haptics, [**Fingernail Haptics (CHI 2023)**](https://doi.org/10.1145/3544548.3581473) investigated tactile feedback through fingernail stimulation, and [**Hasti (2021)**](https://doi.org/10.1109/WHC49131.2021.9517177) explored virtual texture synthesis. These studies informed my hardware choices and research questions around **tracking uncertainty, actuator response, and perceptual fidelity**.",
+      "**Phase 1 (In Progress)** focuses on building a **low-latency haptic communication pipeline** using Meta Quest 3 hand tracking, while accounting for limitations such as poor lighting, occlusion, and tracking uncertainty. After evaluating existing Bluetooth communication tools, I began developing **custom, extensible middleware** to support greater experimental control and future hardware integration. A Unity-based virtual keyboard is designed to stream finger-specific touch events as **compact binary telemetry**, which the middleware relays via **BLE to ESP32-S3 modules** controlling low-cost **ERM vibration motors**.",
+      "**Phase 2** builds on this foundation to investigate **higher-fidelity, movement-dependent tactile rendering**. Using faster-responding **linear resonant actuators (LRAs)**, I plan to translate UV-indexed height and roughness maps into precisely timed haptic patterns. Controlled experiments will investigate the **perceptual limits of texture fidelity**, examining how surface detail, finger movement, and tracking uncertainty affect users' ability to distinguish virtual textures.",
+      "Future directions include **Peltier-based thermal feedback** and specialist-supervised **electrical muscle stimulation (EMS)** for simulating recoil and resistance at virtual interaction boundaries.",
+      "**Phantom Touch reflects the kind of research I want to pursue during my PhD: developing novel physical interfaces and investigating how they shape human interaction with virtual environments.** Through this independent work, I'm building experience in **literature-informed experimental design, embedded systems, XR development, and instrumented prototyping**. I'm eager to bring these capabilities into a collaborative XR research lab, working alongside researchers exploring similar challenges to **refine interaction techniques, conduct rigorous perceptual evaluations, and develop more effective wearable interfaces for immersive computing**.",
     ],
     tags: [
       "Wearable Haptics", "Multimodal Interaction", "Tactile Perception", "XR Interfaces",
@@ -222,9 +224,12 @@ function escapeHTML(value) {
   })[c]);
 }
 
-// Escapes text, then turns **phrase** into bold.
+// Escapes text, then turns [label](https://url) into an external link
+// and **phrase** into bold.
 function formatText(value) {
-  return escapeHTML(value).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  return escapeHTML(value)
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 }
 
 function renderTimeline(listId, items) {
