@@ -67,8 +67,12 @@ const work = [
     ],
     tags: ["Arduino", "Solar Energy Harvesting", "Supercapacitors", "Android", "Hardware Prototyping", "Product Design"],
     link: "",
-    imageURL: "media/thumbnails/smart-mod-square-poster.jpg",
-    videoURL: "media/thumbnails/smart-mod-square.mp4",
+    images: [
+      { src: "images/projects/solar-case/solar-case-panel-raised.jpg", alt: "Opened charging case prototype: a battery, Bluetooth module and Arduino board mounted on the back of a phone, with the solar panel flap lifted behind them" },
+      { src: "images/projects/solar-case/solar-case-final-design.jpg", alt: "Smart MOD phone case opened flat: a black back cover joined by a brown leather hinge to a flap holding a solar panel" },
+      { src: "images/projects/solar-case/solar-case-render.jpg", alt: "3D render of the charging module enclosure, a dark shell with glowing blue circuit-trace patterns and cut-outs for ports" },
+      { src: "images/projects/solar-case/solar-case-prototype-led.jpg", alt: "Built charging module prototype with its circuit-trace pattern lit up in pink, attached by a fabric hinge to a solar panel" },
+    ],
     newTab: false,
   },
 ];
