@@ -14,7 +14,8 @@
 //   link:        leave empty ("") if there's no page yet; the button is hidden
 const work = [
   {
-    title: "Phantom Touch: Feeling the Virtual Without Losing Touch With the Physical",
+    title: "Phantom Touch",
+    subtitle: "Exploring the Boundaries of Touch in XR. Literally.",
     date: "2026",
     context: "Independent research project",
     inProgress: true,
@@ -35,7 +36,7 @@ const work = [
     newTab: false,
   },
   {
-    title: "Elixir Expedition: When Virtual Worlds Change Behind Your Back",
+    title: "Elixir Expedition",
     subtitle: "Exploring Attention-Dependent Environmental Transformations in VR",
     date: "2023",
     context: "Virtual Environments · UT Austin",
@@ -173,18 +174,17 @@ const talks = [
 // instead of imageURL; imageURL is then used as the poster frame.
 const prototypes = [
   {
-    title: "Beheld Health: Building Technology for Human-Centered Care",
+    title: "Beheld Health: Engineering Human-Centered Interfaces",
     date: "2024–Present",
     context: "Frontend & UX Engineer · Beheld Health Inc.",
     description: [
-      "Healthcare is complicated enough without making the people delivering care struggle with the technology meant to support them. At Beheld Health, a healthcare startup originating from **UT Austin's Dell Medical School**, I've been working on making that experience a little easier.",
-      "As the Frontend and UX Engineer, I **lead the design, development, and maintenance** of a **React Native mobile application** that helps healthcare outreach teams connect with participants, manage their daily workflows, and document interactions.",
-      "One of my key contributions was designing a **smart scheduling and task-management interface** that helps callers prioritize outreach, organize follow-ups, and keep track of participant engagement. I also developed **integrated communication features using Twilio**, enabling voice calls, SMS, multimedia messaging, and notifications directly within the application.",
-      "Beyond individual features, I've been responsible for **frontend architecture, reusable UI components, performance optimization, analytics, and CI/CD pipelines** supporting both iOS and Android.",
+      "**A technically sophisticated system is only useful if people can use it effectively.** At Beheld Health, a healthcare startup originating from **UT Austin's Dell Medical School**, I work at the intersection of **UX design, software engineering, and human-centered technology**.",
+      "As the **Frontend and UX Engineer**, I lead the development of a production **React Native application** supporting healthcare outreach teams. My work involves designing intuitive scheduling and task-management interfaces, integrating communication through **Twilio**, and translating complex workflows into accessible experiences. I also oversee **frontend architecture, reusable UI components, performance optimization, and application reliability** across iOS and Android, collaborating closely with researchers and healthcare professionals.",
+      "**This experience has strengthened my ability to design, develop, and deploy user-centered applications across mobile platforms.** I aim to bring these skills into XR research labs, contributing to **intuitive spatial interfaces, companion mobile applications for wearable devices, and experimental systems** that connect immersive software with physical hardware.",
     ],
     tags: [
-      "Human-Computer Interaction", "UX Engineering", "Mobile Development", "Healthcare Technology",
-      "React Native", "TypeScript", "Expo", "Twilio", "Node.js", "AWS", "Sentry",
+      "HCI", "UX Design", "Interactive Systems", "Cross-Platform Development",
+      "React Native", "TypeScript", "Expo", "Twilio", "Node.js",
     ],
     link: "",
     imageURL: "images/projects/beheld/beheld-outreach.jpg",
@@ -200,13 +200,12 @@ const prototypes = [
     date: "2020–2022",
     context: "Frontend Lead · Clarista Inc.",
     description: [
-      "Working with large datasets shouldn't always require writing complex SQL queries or navigating complicated tools. At Clarista, I **led the frontend team** building a **no-code data platform** designed to make data transformation, exploration, and visualization more intuitive and accessible.",
-      "One of our core deliverables was **Flows**, a **visual data transformation editor** built using **React, Redux, and D3.js**. The interface enabled users to build transformation pipelines through an interactive **drag-and-drop canvas**, connecting operations to merge, filter, split, and manipulate datasets without writing code.",
-      "Our work extended across several interconnected modules, including **data cataloging, data lineage visualization, and a real-time analytics dashboard builder**. The dashboard builder allowed users to arrange and customize charts on a visual canvas and publish interactive dashboards, bringing data exploration and reporting into the same platform.",
-      "Beyond development, I was responsible for **frontend architecture, technical decision-making, rapid prototyping**, and coordinating the team's deliverables. I also led the development of a **reusable design system**, collaborating with designers and backend engineers to maintain consistent interactions across modules.",
+      "**Complex data doesn't have to mean complicated interfaces.** At Clarista, I **led the frontend team** developing a no-code platform that made data transformation, exploration, and visualization more intuitive through visual interaction.",
+      "Our core deliverables included **Flows**, a drag-and-drop data transformation editor built with **React, Redux, and D3.js**, allowing users to construct complex data pipelines without writing code. We also developed **data cataloging, lineage visualization, and a real-time analytics dashboard builder**, enabling users to explore data relationships and create customizable visualizations. My responsibilities included **frontend architecture, technical leadership, rapid prototyping, and developing a reusable design system** across these modules.",
+      "**This experience strengthened my ability to translate complex information and workflows into intuitive visual interfaces.** I aim to bring these skills into XR research labs, contributing to **spatial interface design, interactive data visualization, reusable UI systems, and rapid prototyping** of experimental applications.",
     ],
     tags: [
-      "Interaction Design", "Data Visualization", "Frontend Leadership", "Design Systems",
+      "HCI", "Visual Interaction", "Data Visualization", "Design Systems", "Technical Leadership",
       "React", "Redux", "D3.js", "JavaScript", "REST APIs",
     ],
     link: "",
