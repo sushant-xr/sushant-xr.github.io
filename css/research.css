@@ -71,6 +71,16 @@
 
 * { box-sizing: border-box; }
 
+/* Smooth light/dark switch: the toggle adds .theme-fading briefly */
+.theme-fading,
+.theme-fading *,
+.theme-fading *::before,
+.theme-fading *::after {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease,
+    fill 0.4s ease, stroke 0.4s ease, filter 0.4s ease, box-shadow 0.4s ease !important;
+  transition-delay: 0s !important;
+}
+
 /* Bold text uses the strongest ink so it stands out from body copy in both themes */
 strong, b { color: var(--ink); font-weight: 600; }
 

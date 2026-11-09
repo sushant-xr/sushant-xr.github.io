@@ -350,8 +350,15 @@
           const dark = root.getAttribute("data-theme") === "dark";
           toggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
         };
+        let fadeTimer;
         toggle.addEventListener("click", () => {
           const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          // Fade colours between themes (skipped when the visitor prefers reduced motion)
+          if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            root.classList.add("theme-fading");
+            clearTimeout(fadeTimer);
+            fadeTimer = setTimeout(() => root.classList.remove("theme-fading"), 500);
+          }
           root.setAttribute("data-theme", next);
           save("theme", next);
           applyThemeLabel();
