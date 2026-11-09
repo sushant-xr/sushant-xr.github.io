@@ -132,9 +132,10 @@ const personal = [
 
 const talks = [
   {
-    title: "Blending Realities: A Mixed Reality Workshop",
+    title: "Blending Realities",
+    subtitle: "Less Setup, More XR.",
     date: "Feb 2024",
-    context: "Workshop · UT Austin · In collaboration with Bezi",
+    context: "Workshop · UT Austin · With Bezi, a browser-based XR prototyping platform",
     description: [
       "Getting started with XR development can be intimidating, especially when your first steps involve installing a game engine, configuring a development environment, and figuring out where to begin. We wanted to make that first experience a little less overwhelming and a lot more fun.",
       "As a **Bezi Fellow**, I worked with a team of five to organize and facilitate a **beginner-friendly XR workshop** in collaboration with Bezi, a **browser-based platform** for designing and prototyping 3D and XR experiences.",
@@ -150,13 +151,14 @@ const talks = [
     newTab: false,
   },
   {
-    title: "Unity Optimization for Meta Quest: Building Comfortable, High-Performance VR Experiences",
+    title: "Unity Optimization for Meta Quest",
+    subtitle: "More FPS, Less Nausea.",
     date: "Nov 2023",
-    context: "Workshop · Virtual Environments · UT Austin",
+    context: "Talk · UT Austin",
     description: [
       "You can build the most visually stunning and immersive VR experience, but none of it matters if the headset struggles to maintain a stable frame rate. Poor performance can quickly turn immersion into discomfort, leaving participants reaching for a bottle of water or, in the worst case, a bucket.",
-      "To address this challenge, I delivered a **technical workshop at UT Austin** as part of the **Virtual Environments** course, focusing on optimizing Unity-based VR applications for standalone Meta Quest headsets.",
-      "The workshop explored practical techniques for balancing **visual fidelity, rendering performance, and user comfort**, including **interpupillary distance (IPD) calibration, occlusion culling, static batching, Level of Detail (LOD), baked lighting and shadows, and light and reflection probes**. I also demonstrated advanced techniques such as **dynamically switching between precomputed lightmaps** to simulate interactive lighting changes without the performance overhead of real-time lighting.",
+      "To address this challenge, I delivered a **technical talk at UT Austin**, focusing on optimizing Unity-based VR applications for standalone Meta Quest headsets.",
+      "The talk explored practical techniques for balancing **visual fidelity, rendering performance, and user comfort**, including **occlusion culling, static batching, Level of Detail (LOD), baked lighting and shadows, and light and reflection probes**. I also demonstrated advanced techniques such as **dynamically switching between precomputed lightmaps** to simulate interactive lighting changes without the performance overhead of real-time lighting.",
       "Through hands-on demonstrations, participants learned to identify rendering bottlenecks, monitor frame rates, and evaluate optimization strategies using **Meta Quest Developer Hub and OVR Metrics Tool**.",
       "The goal was to help students build **visually compelling, performance-efficient VR experiences** that minimize performance-related discomfort and provide a more reliable foundation for immersive interaction and user studies.",
     ],
