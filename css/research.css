@@ -318,6 +318,11 @@ a:focus-visible, .btn:focus-visible {
 }
 .work-title a { color: var(--ink); transition: color 0.15s; }
 .work-title a:hover, .work-item:hover .work-title a { color: var(--accent); text-decoration: none; }
+.work-title:has(+ .work-subtitle) { margin-bottom: 4px; }
+.work-subtitle {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.0625rem; line-height: 1.4; color: var(--ink-2); margin: 0 0 12px;
+}
 .work-desc { color: var(--ink-2); margin: 0 0 14px; text-align: justify; hyphens: auto; }
 .work-desc + .work-desc { margin-top: -4px; }
 .work-desc strong { color: var(--ink); font-weight: 600; }

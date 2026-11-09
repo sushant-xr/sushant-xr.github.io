@@ -5,6 +5,7 @@
 //   prototypes: web app prototypes    -> rendered into #prototypes-list
 // To add an entry, copy one object and edit the fields.
 //   date:        label shown in the timeline (e.g. "Feb 2024")
+//   subtitle:    optional line shown under the title
 //   description: text shown under the title; use an array for several
 //                paragraphs, and **double asterisks** for bold
 //   newTab:      true for external links (e.g. GitHub)
@@ -32,15 +33,16 @@ const work = [
     newTab: false,
   },
   {
-    title: "Elixir Expedition: Exploring Perception and Environmental Awareness in Immersive VR",
+    title: "Elixir Expedition: When Virtual Worlds Change Behind Your Back",
+    subtitle: "Exploring Attention-Dependent Environmental Transformations in VR",
     date: "2023",
     context: "Virtual Environments · UT Austin",
     description: [
-      "How much of a virtual world do we actually notice, and what happens when that world changes while we're not looking? These questions inspired **Elixir Expedition**, an exploratory XR research project investigating **change blindness, perceptual awareness, and embodied interaction** within an immersive ancient Egyptian environment.",
-      "Developed as a **four-person team project** using Unity and Meta Quest 3, the experience combined physical interactions with subtle environmental transformations. My primary contributions focused on **experimental design, VR prototype development, and performance optimization** for standalone VR hardware.",
-      "I designed interaction mechanisms that connected participants' actions to environmental responses. For example, players could illuminate dark spaces by holding a burning torch against a firepit. Meanwhile, the environment could change without their immediate awareness. Using **head orientation and proximity-based detection**, the system altered objects and spatial layouts when participants looked away, allowing us to explore whether they noticed these changes upon returning.",
-      "We conducted an **exploratory study with eight participants**, examining their awareness and recollection of environmental changes through post-experience feedback. While the small sample and limited surviving data prevent definitive conclusions, the project offered practical experience in designing and evaluating perception-driven VR interactions.",
-      "This experience sparked my interest in **perception-aware XR interfaces** and how virtual environments might adapt to human behavior.",
+      "In immersive VR, the environment can change the moment you look away. But how much of that change do you actually notice when you look back? This question inspired **Elixir Expedition**, an exploratory XR research project investigating **change blindness, perceptual awareness, and embodied interaction**, and how these principles might inform the design of adaptive virtual environments.",
+      "Developed as a **four-person team project** in Unity for Meta Quest 3, the experience placed participants in an interactive ancient Egyptian environment. My primary contributions included **experimental design, VR prototype development, and performance optimization** for standalone VR hardware.",
+      "I designed interaction mechanisms connecting physical actions with environmental responses, such as illuminating dark spaces by holding a burning torch against a firepit. Meanwhile, **head orientation and proximity-based detection** enabled the environment to subtly modify objects and spatial layouts when participants looked away.",
+      "We conducted an **exploratory study with eight participants**, examining their awareness and recollection of these transformations through post-experience feedback. The study helped frame questions about how interaction, attention, and environmental changes influence perception in VR.",
+      "My biggest takeaway was that designing an immersive environment isn't just about what users see, but also what they notice. This project brought together my interests in human perception, experimental interaction design, and real-time XR development. It established a foundation I hope to build on in future XR research, combining **behavior-aware interaction techniques, optimized immersive prototypes, and controlled perceptual evaluations** to investigate how virtual environments can adapt to human behavior.",
     ],
     tags: [
       "Perceptual Awareness", "Change Blindness", "Embodied Interaction", "XR Interfaces",
@@ -222,7 +224,7 @@ function renderTimeline(listId, items) {
   if (!list) return;
 
   list.innerHTML = items
-    .map(({ title, date, context, description, tags, link, imageURL, videoURL, images, newTab, inProgress }) => {
+    .map(({ title, subtitle, date, context, description, tags, link, imageURL, videoURL, images, newTab, inProgress }) => {
       const target = newTab ? ' target="_blank" rel="noopener"' : "";
       const tagItems = (tags || [])
         .map((tag) => `<li class="tag">${escapeHTML(tag)}</li>`)
@@ -274,6 +276,7 @@ function renderTimeline(listId, items) {
         <div class="work-body">
           <p class="work-meta">${date ? `<time>${escapeHTML(date)}</time> · ` : ""}${escapeHTML(context)}${badge}</p>
           <h3 class="work-title">${heading}</h3>
+          ${subtitle ? `<p class="work-subtitle">${escapeHTML(subtitle)}</p>` : ""}
           ${[].concat(description).map((p) => `<p class="work-desc">${formatText(p)}</p>`).join("")}
           ${tagItems ? `<ul class="tags" aria-label="Tags">${tagItems}</ul>` : ""}
           ${button}
