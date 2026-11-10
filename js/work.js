@@ -86,18 +86,18 @@ const work = [
 
 const personal = [
   {
-    title: "Robo-Barista: Automating My Morning Coffee",
+    title: "Robo-Barista",
+    subtitle: "VR-Guided Robot Manipulation",
     date: "2026",
     context: "Personal project",
     inProgress: true,
     description: [
-      "I'm not much of a morning person, but I do love waking up to a fresh cup of coffee. So, naturally, I decided the most reasonable solution was to build a **6-axis robotic arm** and **automate my coffee maker** instead of spending two minutes making it myself.",
-      "The robotic arm is being developed to **remove used coffee pods and load fresh ones**, while a custom mechanical assembly handles the brewing mechanism. I designed a **3D-printed sector gear and stepper-driven pinion** to increase torque, allowing the machine to close its lid and puncture the coffee pod automatically.",
-      "To make the process more autonomous, I integrated a **non-contact water level sensor and pump** to maintain the reservoir, along with a **time-of-flight (ToF) sensor** to detect whether a cup is positioned correctly before brewing. An **ESP32 microcontroller** coordinates the sensors, motors, and mechanical components.",
-      "The entire system is designed to connect with **Alexa**, triggering a sequence of actions when I **dismiss my morning alarm**: refill the reservoir, replace the coffee pod, and start brewing.",
-      "It's a slightly overengineered solution to a very small problem, but that's half the fun of building things.",
+      "What if teaching a robot a new task were as intuitive as demonstrating it with your own hands in VR? That's the idea behind Robo-Barista, an ongoing project exploring **VR teleoperation and robot learning from human demonstrations**. I'm developing an interface that uses a **6DoF VR controller to manipulate a six-axis robotic arm**, with the goal of recording movements and eventually training the robot to reproduce tasks. Coffee preparation is just the first challenge.",
+      "The initial focus is establishing **reliable VR-to-robot control**, translating controller movements into robotic actions while accounting for **coordinate transformations, motion constraints, and latency**. I plan to capture **timestamped motion trajectories** for future learning experiments.",
+      "For the first test scenario, the robot will **replace coffee pods**. I've retrofitted the coffee maker with a **3D-printed sector gear and stepper-driven pinion** to automate lid operation. A **non-contact water-level sensor** and pump manage refilling, while a **time-of-flight (ToF) sensor** verifies cup placement. An **ESP32-S3 running micro-ROS** coordinates the embedded hardware.",
+      "This project combines my experience in **XR development, spatial interaction design, and hardware prototyping** to connect human movement with robotic control. Through it, I aim to deepen my understanding of **robot kinematics, motion planning, and learning from demonstrations**, investigating how immersive interfaces can make robotic manipulation more intuitive and accessible.",
     ],
-    tags: ["ESP32", "Robotics", "3D Printing", "IoT"],
+    tags: ["VR Teleoperation", "Human-Robot Interaction", "ESP32", "Robotics", "3D Printing", "IoT"],
     link: "",
     images: [
       { src: "images/thumbnails/square/vr-robot-arm.jpg", alt: "3D-printed, servo-driven 6-axis robot arm held up on a desk in front of a monitor" },
