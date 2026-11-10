@@ -29,7 +29,6 @@ const work = [
     ],
     tags: [
       "Wearable Haptics", "Multimodal Interaction", "Tactile Perception", "XR Interfaces",
-      "Unity", "C#", "Meta Quest 3", "ESP32-S3", "BLE", "DRV2605L", "ERM/LRA Actuators",
     ],
     link: "",
     imageURL: "images/thumbnails/square/wristband-placeholder.svg",
@@ -49,7 +48,6 @@ const work = [
     ],
     tags: [
       "Perceptual Awareness", "Change Blindness", "Embodied Interaction", "XR Interfaces",
-      "Unity", "C#", "Meta Quest 3", "XR Interaction Toolkit",
     ],
     link: "",
     imageURL: "media/thumbnails/elixir-youtube-square-poster.jpg",
@@ -70,8 +68,7 @@ const work = [
       "Although this wasn't an XR project, it shaped how I approach hardware development today. A working circuit is only the beginning; the real challenge is turning it into an **integrated, reliable, and usable device**. I'm now applying that mindset to **wearable XR interfaces**, where I want to combine **embedded systems, sensing, and physical actuation** to develop and evaluate new ways of interacting with virtual environments.",
     ],
     tags: [
-      "Energy Harvesting", "Embedded Systems", "Wireless Communication", "Portable Hardware Design",
-      "Arduino", "Solar Energy Harvesting", "Supercapacitors", "Android", "Hardware Prototyping",
+      "Embedded Systems", "Wireless Connectivity", "Android Development", "Portable Hardware Design",
     ],
     link: "",
     images: [
@@ -97,7 +94,7 @@ const personal = [
       "For the first test scenario, the robot will **replace coffee pods**. I've retrofitted the coffee maker with a **3D-printed sector gear and stepper-driven pinion** to automate lid operation. A **non-contact water-level sensor** and pump manage refilling, while a **time-of-flight (ToF) sensor** verifies cup placement. An **ESP32-S3 running micro-ROS** coordinates the embedded hardware.",
       "This project combines my experience in **XR development, spatial interaction design, and hardware prototyping** to connect human movement with robotic control. Through it, I aim to deepen my understanding of **robot kinematics, motion planning, and learning from demonstrations**, investigating how immersive interfaces can make robotic manipulation more intuitive and accessible.",
     ],
-    tags: ["VR Teleoperation", "Human-Robot Interaction", "ESP32", "Robotics", "3D Printing", "IoT"],
+    tags: ["VR Teleoperation", "Human-Robot Interaction", "ESP32", "Robotics", "3D Printing"],
     link: "",
     images: [
       { src: "images/thumbnails/square/vr-robot-arm.jpg", alt: "3D-printed, servo-driven 6-axis robot arm held up on a desk in front of a monitor" },
@@ -106,18 +103,20 @@ const personal = [
     newTab: false,
   },
   {
-    title: "Flow State Timer: Rethinking Pomodoro",
+    title: "Flow State Timer",
+    subtitle: "Pomodoro, With Fewer Interruptions.",
     date: "2026",
     context: "Personal project",
     description: [
       "Getting started is usually the hardest part of any task. But once I'm finally focused and making progress, I want to finish the task at hand, not stop halfway through because a timer says it's time for a break. Unfortunately, that's exactly what most Pomodoro timers do.",
       "So I decided to build my own, with two simple rules: **don't interrupt me when I'm focused**, and **don't let my five-minute breaks turn into thirty**.",
-      "The timer starts with a traditional **25-minute countdown**, but instead of sounding an alarm, it quietly transitions into **Flow State mode**, counting upward and tracking the extra time I spend working. No forced breaks, just uninterrupted momentum until I'm ready to stop.",
-      "Breaks, however, are a different story. I've lost count of how many times I've said, \"I'll be back in five minutes,\" only to return half an hour later. So I added a **break-tracking mode** that counts the minutes beyond my planned break and triggers a **repeating haptic reminder** until I stop it. It's deliberately annoying, and that's kind of the point.",
-      "I built the device using an **ESP8266, OLED display, capacitive touch controls, and a vibration motor**. It also **tracks focused work across different projects**.",
-      "What started as a small experiment has become my **daily driver**. It leaves me alone when I'm productive and holds me accountable when I'm procrastinating.",
+      "The timer starts with a traditional **25-minute countdown**, but instead of sounding an alarm, it quietly transitions into **Flow State mode**, counting upward until I'm ready to stop. Breaks, however, are a different story. When a planned break ends, the timer tracks the extra minutes and triggers a **repeating haptic reminder** until I stop it. It's deliberately annoying, and that's kind of the point.",
+      "What started as a weekend project built from spare electronics lying around became a functional physical interface combining an **ESP8266, OLED display, capacitive touch controls, and vibration motor**. It also **logs focused work sessions across different projects to Arduino Cloud**, allowing me to track my productivity over time. It's since become my **daily driver**.",
+      "Beyond solving a personal frustration, this project demonstrates my ability to **design and prototype physical interfaces**, combining **embedded programming, sensor integration, haptic feedback, and cloud-connected hardware**. These are the same foundational skills I'm building upon in my work on **wearable XR interfaces**, where thoughtful hardware design and tactile feedback can enable more intuitive interactions between people and technology.",
     ],
-    tags: ["ESP8266", "OLED", "Capacitive Touch", "Haptic Feedback"],
+    tags: [
+      "Tangible Interfaces", "Haptic Interaction", "Physical Computing", "Human-Centered Design",
+    ],
     link: "",
     images: [
       { src: "images/projects/flow-state-timer/flow-state-timer-1.jpg", alt: "Flow State Timer on a desk, its OLED screen reading Flow State +13:52, Keep Going, above minus, zero and plus touch buttons" },
@@ -163,8 +162,7 @@ const talks = [
       "The goal was to help students build **visually compelling, performance-efficient VR experiences** that minimize performance-related discomfort and provide a more reliable foundation for immersive interaction and user studies.",
     ],
     tags: [
-      "VR Performance Optimization", "Rendering Techniques", "User Comfort", "Standalone XR",
-      "Unity", "Meta Quest", "Meta Quest Developer Hub", "OVR Metrics Tool",
+      "XR Performance Optimization", "Real-Time Rendering", "Unity", "Meta Quest", "Usability",
     ],
     link: "",
     imageURL: "images/thumbnails/square/unity-quest-talk.jpg",
@@ -176,7 +174,8 @@ const talks = [
 // instead of imageURL; imageURL is then used as the poster frame.
 const prototypes = [
   {
-    title: "Beheld Health: Engineering Human-Centered Interfaces",
+    title: "Beheld Health",
+    subtitle: "Engineering Human-Centered Interfaces",
     date: "2024–Present",
     context: "Frontend & UX Engineer · Beheld Health Inc.",
     description: [
@@ -185,8 +184,7 @@ const prototypes = [
       "**This experience has strengthened my ability to design, develop, and deploy user-centered applications across mobile platforms.** I aim to bring these skills into XR research labs, contributing to **intuitive spatial interfaces, companion mobile applications for wearable devices, and experimental systems** that connect immersive software with physical hardware.",
     ],
     tags: [
-      "HCI", "UX Design", "Interactive Systems", "Cross-Platform Development",
-      "React Native", "TypeScript", "Expo", "Twilio", "Node.js",
+      "Mobile Performance Optimization", "Human-Centered Design", "Cross-Platform Development",
     ],
     link: "",
     imageURL: "images/projects/beheld/beheld-outreach.jpg",
@@ -198,7 +196,8 @@ const prototypes = [
     newTab: false,
   },
   {
-    title: "Clarista: Building a No-Code Data Platform",
+    title: "Clarista",
+    subtitle: "Building a No-Code Data Platform",
     date: "2020–2022",
     context: "Frontend Lead · Clarista Inc.",
     description: [
@@ -207,8 +206,7 @@ const prototypes = [
       "**This experience strengthened my ability to translate complex information and workflows into intuitive visual interfaces.** I aim to bring these skills into XR research labs, contributing to **spatial interface design, interactive data visualization, reusable UI systems, and rapid prototyping** of experimental applications.",
     ],
     tags: [
-      "HCI", "Visual Interaction", "Data Visualization", "Design Systems", "Technical Leadership",
-      "React", "Redux", "D3.js", "JavaScript", "REST APIs",
+      "Data Visualization", "Design Systems", "Technical Leadership", "MERN Stack",
     ],
     link: "",
     imageURL: "media/thumbnails/clarista-square-poster.jpg",
