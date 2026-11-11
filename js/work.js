@@ -31,7 +31,8 @@ const work = [
       "Wearable Haptics", "Multimodal Interaction", "Tactile Perception", "XR Interfaces",
     ],
     link: "",
-    imageURL: "images/thumbnails/square/wristband-placeholder.svg",
+    imageURL: "media/thumbnails/phantom-touch-square-poster.jpg",
+    videoURL: "media/thumbnails/phantom-touch-square.mp4",
     newTab: false,
   },
   {
