@@ -328,6 +328,7 @@ function renderTimeline(listId, items) {
             <div class="video-controls">
               <button type="button" class="video-btn video-toggle" aria-label="Pause video">${ICON_PAUSE}</button>
               <button type="button" class="video-btn video-restart" aria-label="Restart video">${ICON_RESTART}</button>
+              <button type="button" class="video-btn video-expand" aria-label="Enlarge video">${ICON_EXPAND}</button>
             </div>
           </div>`;
       } else {
@@ -370,6 +371,8 @@ const svgIcon = (path) =>
 const ICON_PAUSE = svgIcon('<rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/>');
 const ICON_PLAY = svgIcon('<path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" fill="currentColor"/>');
 const ICON_RESTART = svgIcon('<path d="M4 12a8 8 0 1 0 2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>');
+
+const ICON_EXPAND = svgIcon('<path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>');
 
 function initVideoControls(root) {
   const video = root.querySelector("video");
@@ -426,6 +429,96 @@ function initCarousel(root) {
   root.addEventListener("focusout", start);
   start();
 }
+
+// ---------- Lightbox: charts and timeline videos open large, centered ----------
+// Native <dialog>: centered over a backdrop, Esc closes, focus stays inside.
+const ICON_CLOSE = svgIcon('<path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>');
+let lightbox;
+let lightboxRestore = null; // runs on close (e.g. resume the inline video)
+
+function getLightbox() {
+  if (lightbox) return lightbox;
+  lightbox = document.createElement("dialog");
+  lightbox.className = "lightbox";
+  lightbox.setAttribute("aria-label", "Enlarged view");
+  lightbox.innerHTML = `
+    <button type="button" class="lightbox-close" aria-label="Close">${ICON_CLOSE}</button>
+    <div class="lightbox-content"></div>
+    <p class="lightbox-caption"></p>`;
+  document.body.appendChild(lightbox);
+  lightbox.querySelector(".lightbox-close").addEventListener("click", () => lightbox.close());
+  // A click on the backdrop lands on the dialog itself, not its children
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) lightbox.close();
+  });
+  lightbox.addEventListener("close", () => {
+    lightbox.querySelector(".lightbox-content").innerHTML = ""; // stops the enlarged video
+    document.documentElement.classList.remove("lightbox-open");
+    if (lightboxRestore) lightboxRestore();
+    lightboxRestore = null;
+  });
+  return lightbox;
+}
+
+function openLightbox(node, captionHTML, label, onClose) {
+  const box = getLightbox();
+  box.querySelector(".lightbox-content").replaceChildren(node);
+  const caption = box.querySelector(".lightbox-caption");
+  caption.innerHTML = captionHTML || "";
+  caption.hidden = !captionHTML;
+  box.setAttribute("aria-label", label || "Enlarged view");
+  lightboxRestore = onClose || null;
+  document.documentElement.classList.add("lightbox-open");
+  box.showModal();
+  box.querySelector(".lightbox-close").focus();
+}
+
+function openFigure(figure) {
+  // Enlarge whichever rendering (light or dark) is showing right now
+  const link = [...figure.querySelectorAll("a")].find((a) => a.offsetParent !== null) || figure.querySelector("a");
+  const src = figure.querySelector(".fig-light img");
+  const img = document.createElement("img");
+  img.src = link.getAttribute("href");
+  img.alt = src ? src.alt : "";
+  const caption = figure.querySelector("figcaption");
+  openLightbox(img, caption ? caption.innerHTML : "", "Enlarged chart");
+}
+
+function openVideo(root) {
+  const inline = root.querySelector("video");
+  const wasPlaying = !inline.paused;
+  inline.pause();
+  const video = document.createElement("video");
+  video.src = inline.currentSrc || inline.src;
+  video.poster = inline.poster;
+  video.controls = true; // full controls here, including sound and fullscreen
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.addEventListener("loadedmetadata", () => (video.currentTime = inline.currentTime), { once: true });
+  if (!reduceMotion) video.autoplay = true;
+  const title = root.closest(".work-item")?.querySelector(".work-title")?.textContent.trim();
+  openLightbox(video, "", title ? `${title} video` : "Enlarged video", () => {
+    inline.currentTime = video.currentTime || inline.currentTime;
+    if (wasPlaying) inline.play();
+  });
+}
+
+// One delegated listener covers every list, including re-rendered ones
+document.addEventListener("click", (e) => {
+  const figureLink = e.target.closest(".work-figure a");
+  if (figureLink) {
+    e.preventDefault(); // the link stays as a no-JS fallback to the full image
+    openFigure(figureLink.closest(".work-figure"));
+    return;
+  }
+  const expand = e.target.closest(".video-expand");
+  const video = e.target.closest(".has-video video");
+  if (expand || video) {
+    e.preventDefault();
+    openVideo((expand || video).closest(".has-video"));
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   renderTimeline("work-list", work);
