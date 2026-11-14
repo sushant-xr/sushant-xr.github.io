@@ -8,7 +8,9 @@
 //   subtitle:    optional line shown under the title
 //   description: text shown under the title; use an array for several
 //                paragraphs, **double asterisks** for bold, and
-//                [label](https://url) for a link that opens in a new tab
+//                [label](https://url) for a link that opens in a new tab.
+//                An item can also be { figures: [...] } to show charts
+//                between paragraphs (see renderDescriptionItem)
 //   newTab:      true for external links (e.g. GitHub)
 //   inProgress:  true shows an "In progress" label
 //   link:        leave empty ("") if there's no page yet; the button is hidden
@@ -25,7 +27,43 @@ const work = [
       "Prior research helped shape that approach. [**Haplets**](https://doi.org/10.3389/frvir.2021.738613) demonstrated finger-worn vibrotactile feedback while leaving the fingertips free, which informed the placement of Phantom Touch's actuators on the backs of the fingers. [**Augmenting On-Body Touch Input with Tactile Feedback Through Fingernail Haptics (CHI 2023)**](https://doi.org/10.1145/3544548.3581473) examined how tactile feedback can enrich touch interactions, including button-like sensations. [**Hasti**](https://doi.org/10.1109/WHC49131.2021.9517177) showed how to synthesize vibrotactile feedback and contact sounds during virtual texture interactions, pointing to a possible future direction for Phantom Touch.",
       "**Phase 1 (Complete): Building the glove.** I began by assembling a low-cost prototype and establishing a way to trigger haptic patterns. The glove uses one **ERM vibration motor and motor driver per finger**, a 1200 mAh battery with power-management circuitry, three capacitive touch sensors, and an OLED for navigation and debugging.",
       "An **ESP32-S3** gives the prototype both Bluetooth Low Energy (BLE) and 2.4 GHz Wi-Fi connectivity, so I can compare the options as the system develops. The electronics sit on flexible perfboard attached with Velcro, making the fabric removable for cleaning. Replaceable adhesive tabs hold the motors in place while I investigate their placement.",
-      "The prototype can already play haptic patterns from its embedded interface and a PC-based BLE client. With this basic feedback loop working, I **measured latency over BLE and Wi-Fi** to guide the next phase.",
+      "The prototype can already play haptic patterns from its embedded interface and a PC-based BLE client. With this basic feedback loop working, I **measured latency over BLE and Wi-Fi** to choose how commands should reach the glove in the next phase.",
+      "**How I measured it.** I added a latency benchmark to the firmware and wrote a Python test harness. The PC sends haptic commands over **BLE, Wi-Fi (UDP) or wired USB**, with USB as the baseline. The glove timestamps each command twice, on arrival and once its motor drivers have been written, and reports both over USB. Continuous clock synchronization over that USB link keeps the PC and glove clocks aligned to within **±0.3 ms**. Every measurement is therefore one-way: from the moment a command leaves the PC until the glove has commanded the motor.",
+      "Each link ran the same test matrix of **4,450 commands**, **22,250** across five configurations. It covered **one to five fingers per command** in random order, **five fingers as one command versus five separate commands**, sustained streams from **10 to 200 commands per second**, and an **emergency stop with all five motors running**. For Wi-Fi, I also measured the effect of its default **power-saving mode** and of **sharing the radio with BLE**. Bench testing also exposed a hardware issue: both radios connected reliably only at reduced transmit power, which I am now investigating as a possible power-supply problem.",
+      {
+        figures: [
+          {
+            src: "images/projects/phantom-touch/latency-tail.png",
+            srcDark: "images/projects/phantom-touch/latency-tail-dark.png",
+            alt: "Log-scale chart of how often a command is slower than a given latency. USB drops to zero by about 11 ms and BLE by about 81 ms. Wi-Fi with power saving off keeps a tail out to about 198 ms. Wi-Fi with power saving on and Wi-Fi sharing the radio with BLE extend to about 300 and 390 ms.",
+            caption: "**How often a command is slower than X**, pooled over 1,600 commands per link (1–5 fingers and emergency stop). BLE's slowest command took 81 ms. Wi-Fi's long tail reached 198 ms.",
+            wide: true,
+          },
+          {
+            src: "images/projects/phantom-touch/latency-percentiles.png",
+            srcDark: "images/projects/phantom-touch/latency-percentiles-dark.png",
+            alt: "Median, 95th and 99th percentile latency per link: USB 6, 9 and 10 ms; BLE 17, 35 and 46 ms; Wi-Fi 10, 35 and 77 ms; Wi-Fi with power saving 72, 177 and 222 ms; Wi-Fi with power saving and BLE coexistence 31, 107 and 181 ms.",
+            caption: "**Median, p95 and p99 by link.** Wi-Fi has the lower median, but BLE has the much shorter worst case.",
+            wide: true,
+          },
+          {
+            src: "images/projects/phantom-touch/latency-by_fingers.png",
+            srcDark: "images/projects/phantom-touch/latency-by_fingers-dark.png",
+            alt: "Box plots of latency for one to five fingers per command on each link. Within each link, latency rises only a few milliseconds from one to five fingers.",
+            caption: "**Fingers per command.** Driving five fingers instead of one adds about 4 ms on every link.",
+            wide: true,
+          },
+          {
+            src: "images/projects/phantom-touch/latency-rate.png",
+            srcDark: "images/projects/phantom-touch/latency-rate-dark.png",
+            alt: "p95 latency and command loss against command rate from 10 to 200 per second. BLE, Wi-Fi and USB stay flat with no loss. Wi-Fi with power saving improves at higher rates because steady traffic keeps the radio awake.",
+            caption: "**Command rate.** No link lost commands up to 200 per second. Wi-Fi's power-saving mode is slowest at low rates.",
+            wide: true,
+          },
+        ],
+      },
+      "**Results.** Wi-Fi with power saving disabled had the lowest median wireless latency, **10 ms versus 17 ms for BLE**. BLE was far more consistent. Its 99th-percentile latency was **46 ms versus 78 ms**, and its slowest command took **81 ms versus 198 ms**. BLE delivered every command, including streams of 200 per second. With Wi-Fi's default power saving, the median rose to **72 ms**. When Wi-Fi shared the radio with BLE, about **3% of commands were lost**. The number of fingers per command had little effect on any link. About 5 ms of every command is spent on the glove itself, so optimizing the firmware will benefit whichever link is used.",
+      "**Phase 1 conclusion: BLE.** I selected **Bluetooth Low Energy** as the glove's wireless link. For tactile feedback, an occasional very late pulse is more disruptive than one that is consistently a few milliseconds slower. I therefore prioritized **worst-case latency and reliability over the median**. BLE also avoids Wi-Fi's need to disable power saving, which is likely to increase battery drain, although I have not measured that yet. These are bench measurements of when the glove commands a motor, not perceptual results. Phase 2 will test the link under real conditions, including distance, the hand blocking the signal, and motor spin-up time.",
       "**Phase 2 (In Progress): Connecting XR interactions.** The next step is to connect virtual interaction events to the glove. I plan to use a **Unity keyboard prototype** in which each key produces two tactile events: one when a finger touches the key and another when it is pressed. To relay these events to individual actuators, I will evaluate existing BLE tools or build a custom tool if current options do not support the data capture, analysis, and frequency control I need.",
       "Early **Meta Quest 3** experiments also surfaced a hardware constraint: electronics mounted on the back of the hand appeared to interfere with hand tracking. I plan to move them to a wristband and then reassess tracking performance. Once the system is integrated, I can examine **touch-to-haptic latency, typing speed and accuracy, tracking performance, and user experience**.",
       "**Looking ahead.** Together, these phases establish a platform for exploring how wearable feedback can support interaction in XR. Future work could compare ERM motors with **LRAs or voice-coil actuators**, then investigate how actuator choice affects tactile perception. Building on Hasti, I also hope to explore **texture feedback** informed by properties in 3D surface maps, such as normal and roughness maps. Tools such as UEVR and flat-to-VR mods may offer additional environments for testing the interface.",
@@ -236,6 +274,27 @@ function formatText(value) {
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 }
 
+// A description item is a paragraph string, or { figures: [...] } for a group of
+// charts shown between paragraphs. Each figure: { src, srcDark, alt, caption, wide }.
+// srcDark replaces src in the dark theme; wide spans the full text column.
+function renderDescriptionItem(item) {
+  if (typeof item === "string") return `<p class="work-desc">${formatText(item)}</p>`;
+  const figures = (item.figures || [])
+    .map(({ src, srcDark, alt, caption, wide }) => {
+      const img = (file, cls, hidden) =>
+        `<a class="${cls}" href="${file}" target="_blank" rel="noopener"${hidden ? ' aria-hidden="true" tabindex="-1"' : ""}>
+          <img src="${file}" alt="${hidden ? "" : escapeHTML(alt || "")}" loading="lazy" />
+        </a>`;
+      return `<figure class="work-figure${wide ? " is-wide" : ""}">
+          ${img(src, "fig-light", false)}
+          ${srcDark ? img(srcDark, "fig-dark", true) : ""}
+          ${caption ? `<figcaption>${formatText(caption)}</figcaption>` : ""}
+        </figure>`;
+    })
+    .join("");
+  return `<div class="work-figures">${figures}</div>`;
+}
+
 function renderTimeline(listId, items) {
   const list = document.getElementById(listId);
   if (!list) return;
@@ -294,7 +353,7 @@ function renderTimeline(listId, items) {
           <p class="work-meta">${date ? `<time>${escapeHTML(date)}</time> · ` : ""}${escapeHTML(context)}${badge}</p>
           <h3 class="work-title">${heading}</h3>
           ${subtitle ? `<p class="work-subtitle">${escapeHTML(subtitle)}</p>` : ""}
-          ${[].concat(description).map((p) => `<p class="work-desc">${formatText(p)}</p>`).join("")}
+          ${[].concat(description).map(renderDescriptionItem).join("")}
           ${tagItems ? `<ul class="tags" aria-label="Tags">${tagItems}</ul>` : ""}
           ${button}
         </div>

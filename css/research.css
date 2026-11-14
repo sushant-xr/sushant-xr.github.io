@@ -344,6 +344,33 @@ a:focus-visible, .btn:focus-visible {
 .work-desc a:hover { text-decoration-color: currentColor; }
 .work-desc a strong { color: inherit; }
 
+/* ---------- Charts inside a description ({ figures: [...] } in work.js) ---------- */
+.work-figures {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 16px; margin: 6px 0 22px;
+}
+.work-figure { margin: 0; min-width: 0; }
+.work-figure.is-wide { grid-column: 1 / -1; }
+.work-figure a {
+  display: block; border: 1px solid var(--line); border-radius: 6px; overflow: hidden;
+  background: var(--bg-soft); transition: border-color 0.15s;
+}
+.work-figure a:hover { border-color: var(--hover-line); }
+.work-figure img { width: 100%; height: auto; }
+.work-figure figcaption { color: var(--ink-3); font-size: 0.875rem; line-height: 1.45; margin-top: 8px; }
+.work-figure figcaption strong { color: var(--ink-2); font-weight: 600; }
+/* Each chart ships a light and a dark rendering; show the one matching the theme. */
+.work-figure .fig-dark { display: none; }
+:root[data-theme="dark"] .work-figure .fig-light { display: none; }
+:root[data-theme="dark"] .work-figure .fig-dark { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .work-figure .fig-light { display: none; }
+  :root:not([data-theme="light"]) .work-figure .fig-dark { display: block; }
+}
+@media (max-width: 560px) {
+  .work-figures { grid-template-columns: minmax(0, 1fr); }
+}
+
 /* ---------- Image carousel (timeline thumbnail) ---------- */
 .work-media.carousel { position: relative; aspect-ratio: 1 / 1; }
 .work-media .carousel-slide {
