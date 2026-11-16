@@ -22,13 +22,18 @@ const work = [
     context: "Independent research project",
     inProgress: true,
     description: [
+      { h: "Motivation" },
       "What if you could feel virtual surfaces without losing the ability to interact with the physical world? Phantom Touch explores this question through a **DIY haptic glove built from low-cost components**. The project investigates **wearable vibrotactile feedback** while keeping the **fingertips exposed** for touching real objects.",
       "This design responds to a challenge in hand-tracked XR: users can reach and gesture naturally, but virtual interactions such as typing can feel ungrounded without tactile feedback. Existing haptic gloves offer ways to address this, but their hardware can limit experimentation with actuator placement and configuration. Phantom Touch takes a **modular approach**, making it easier to reposition or replace components as the design evolves.",
+      { h: "Related Work" },
       "Prior research helped shape that approach. [Preechayasomboon and Rombokas (2021)](https://doi.org/10.3389/frvir.2021.738613) demonstrated **Haplets**, finger-worn vibrotactile devices that leave the fingertips free, which informed the placement of Phantom Touch's actuators on the backs of the fingers. [Tran et al. (2023)](https://doi.org/10.1145/3544548.3581473) examined how tactile feedback through the fingernail can enrich on-body touch input, including button-like sensations. [Chan et al. (2021)](https://doi.org/10.1109/WHC49131.2021.9517177) introduced **Hasti**, which synthesizes vibrotactile feedback and contact sounds during virtual texture interactions, pointing to a possible future direction for Phantom Touch.",
-      "**Phase 1 (Complete): Building the glove.** I began by assembling a low-cost prototype and establishing a way to trigger haptic patterns. The glove uses one **ERM vibration motor and motor driver per finger**, a 1200 mAh battery with power-management circuitry, three capacitive touch sensors, and an OLED for navigation and debugging.",
+      { h: "Building the Glove", label: "Phase 1 (Complete)" },
+      { h: "Prototype", level: 2 },
+      "I began by assembling a low-cost prototype and establishing a way to trigger haptic patterns. The glove uses one **ERM vibration motor and motor driver per finger**, a 1200 mAh battery with power-management circuitry, three capacitive touch sensors, and an OLED for navigation and debugging.",
       "An **ESP32-S3** gives the prototype both Bluetooth Low Energy (BLE) and 2.4 GHz Wi-Fi connectivity, so I can compare the options as the system develops. The electronics sit on flexible perfboard attached with Velcro, making the fabric removable for cleaning. Replaceable adhesive tabs hold the motors in place while I investigate their placement.",
       "The prototype can already play haptic patterns from its embedded interface and a PC-based BLE client. With this basic feedback loop working, I **measured latency over BLE and Wi-Fi** to choose how commands should reach the glove in the next phase.",
-      "**How I measured it.** I added a latency benchmark to the firmware and wrote a Python test harness. The PC sends haptic commands over **BLE, Wi-Fi (UDP) or wired USB**, with USB as the baseline. The glove timestamps each command twice, on arrival and once its motor drivers have been written, and reports both over USB. Continuous clock synchronization over that USB link keeps the PC and glove clocks aligned to within **±0.3 ms**. Every measurement is therefore one-way: from the moment a command leaves the PC until the glove has commanded the motor.",
+      { h: "Latency Evaluation", level: 2 },
+      "**Methods:** I added a latency benchmark to the firmware and wrote a Python test harness. The PC sends haptic commands over **BLE, Wi-Fi (UDP) or wired USB**, with USB as the baseline. The glove timestamps each command twice, on arrival and once its motor drivers have been written, and reports both over USB. Continuous clock synchronization over that USB link keeps the PC and glove clocks aligned to within **±0.3 ms**. Every measurement is therefore one-way: from the moment a command leaves the PC until the glove has commanded the motor.",
       "Each link ran the same test matrix of **4,450 commands**, **22,250** across five configurations. It covered **one to five fingers per command** in random order, **five fingers as one command versus five separate commands**, sustained streams from **10 to 200 commands per second**, and an **emergency stop with all five motors running**. For Wi-Fi, I also measured the effect of its default **power-saving mode** and of **sharing the radio with BLE**. Bench testing also exposed a hardware issue: both radios connected reliably only at reduced transmit power, which I am now investigating as a possible power-supply problem.",
       {
         figures: [
@@ -62,11 +67,14 @@ const work = [
           },
         ],
       },
-      "**Results.** Wi-Fi with power saving disabled had the lowest median wireless latency, **10 ms versus 17 ms for BLE**. BLE was far more consistent. Its 99th-percentile latency was **46 ms versus 78 ms**, and its slowest command took **81 ms versus 198 ms**. BLE delivered every command, including streams of 200 per second. With Wi-Fi's default power saving, the median rose to **72 ms**. When Wi-Fi shared the radio with BLE, about **3% of commands were lost**. The number of fingers per command had little effect on any link. About 5 ms of every command is spent on the glove itself, so optimizing the firmware will benefit whichever link is used.",
-      "**Phase 1 conclusion: BLE.** I selected **Bluetooth Low Energy** as the glove's wireless link. For tactile feedback, an occasional very late pulse is more disruptive than one that is consistently a few milliseconds slower. I therefore prioritized **worst-case latency and reliability over the median**. BLE also avoids Wi-Fi's need to disable power saving, which is likely to increase battery drain, although I have not measured that yet. These are bench measurements of when the glove commands a motor, not perceptual results. Phase 2 will test the link under real conditions, including distance, the hand blocking the signal, and motor spin-up time.",
-      "**Phase 2 (In Progress): Connecting XR interactions.** The next step is to connect virtual interaction events to the glove. I plan to use a **Unity keyboard prototype** in which each key produces two tactile events: one when a finger touches the key and another when it is pressed. To relay these events to individual actuators, I will evaluate existing BLE tools or build a custom tool if current options do not support the data capture, analysis, and frequency control I need.",
+      "**Results:** Wi-Fi with power saving disabled had the lowest median wireless latency, **10 ms versus 17 ms for BLE**. BLE was far more consistent. Its 99th-percentile latency was **46 ms versus 78 ms**, and its slowest command took **81 ms versus 198 ms**. BLE delivered every command, including streams of 200 per second. With Wi-Fi's default power saving, the median rose to **72 ms**. When Wi-Fi shared the radio with BLE, about **3% of commands were lost**. The number of fingers per command had little effect on any link. About 5 ms of every command is spent on the glove itself, so optimizing the firmware will benefit whichever link is used.",
+      "**Conclusion:** I selected **Bluetooth Low Energy** as the glove's wireless link. For tactile feedback, an occasional very late pulse is more disruptive than one that is consistently a few milliseconds slower. I therefore prioritized **worst-case latency and reliability over the median**. BLE also avoids Wi-Fi's need to disable power saving, which is likely to increase battery drain, although I have not measured that yet. These are bench measurements of when the glove commands a motor, not perceptual results. Phase 2 will test the link under real conditions, including distance, the hand blocking the signal, and motor spin-up time.",
+      { h: "Connecting XR Interactions", label: "Phase 2 (In Progress)" },
+      "The next step is to connect virtual interaction events to the glove. I plan to use a **Unity keyboard prototype** in which each key produces two tactile events: one when a finger touches the key and another when it is pressed. To relay these events to individual actuators, I will evaluate existing BLE tools or build a custom tool if current options do not support the data capture, analysis, and frequency control I need.",
       "Early **Meta Quest 3** experiments also surfaced a hardware constraint: electronics mounted on the back of the hand appeared to interfere with hand tracking. I plan to move them to a wristband and then reassess tracking performance. Once the system is integrated, I can examine **touch-to-haptic latency, typing speed and accuracy, tracking performance, and user experience**.",
-      "**Looking ahead.** Together, these phases establish a platform for exploring how wearable feedback can support interaction in XR. Future work could compare ERM motors with **LRAs or voice-coil actuators**, then investigate how actuator choice affects tactile perception. Building on Hasti, I also hope to explore **texture feedback** informed by properties in 3D surface maps, such as normal and roughness maps. Tools such as UEVR and flat-to-VR mods may offer additional environments for testing the interface.",
+      { h: "Future Work" },
+      "Together, these phases establish a platform for exploring how wearable feedback can support interaction in XR. Future work could compare ERM motors with **LRAs or voice-coil actuators**, then investigate how actuator choice affects tactile perception. Building on Hasti, I also hope to explore **texture feedback** informed by properties in 3D surface maps, such as normal and roughness maps. Tools such as UEVR and flat-to-VR mods may offer additional environments for testing the interface.",
+      { h: "Research Direction" },
       "**Phantom Touch reflects the kind of research I want to pursue during my PhD: developing novel physical interfaces and investigating how they shape human interaction with virtual environments.** Through this independent work, I'm building experience in **literature-informed experimental design, embedded systems, XR development, and instrumented prototyping**. I'm eager to bring these capabilities into a collaborative XR research lab, working with researchers to **refine interaction techniques, conduct perceptual evaluations, and develop more effective wearable interfaces for immersive computing**.",
     ],
     tags: [
@@ -274,11 +282,21 @@ function formatText(value) {
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 }
 
-// A description item is a paragraph string, or { figures: [...] } for a group of
-// charts shown between paragraphs. Each figure: { src, srcDark, alt, caption, wide }.
-// srcDark replaces src in the dark theme; wide spans the full text column.
+// A description item is one of:
+//   "text"                      a paragraph (supports **bold** and [label](url))
+//   { h, level, label }         a paper-style heading: level 1 = section (default),
+//                               level 2 = subsection; label is an optional line above
+//                               the title, e.g. "Phase 1 (Complete)"
+//   { figures: [...] }          charts shown between paragraphs. Each figure:
+//                               { src, srcDark, alt, caption, wide }. srcDark replaces
+//                               src in the dark theme; wide spans the full text column.
 function renderDescriptionItem(item) {
   if (typeof item === "string") return `<p class="work-desc">${formatText(item)}</p>`;
+  if (item.h) {
+    const tag = item.level === 2 ? "h5" : "h4";
+    const label = item.label ? `<span class="work-h-label">${escapeHTML(item.label)}</span>` : "";
+    return `<${tag} class="work-h work-h${item.level === 2 ? 2 : 1}">${label}<span class="work-h-title">${escapeHTML(item.h)}</span></${tag}>`;
+  }
   const figures = (item.figures || [])
     .map(({ src, srcDark, alt, caption, wide }) => {
       const img = (file, cls, hidden) =>
