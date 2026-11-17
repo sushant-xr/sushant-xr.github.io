@@ -377,6 +377,9 @@ a:focus-visible, .btn:focus-visible {
 .work-figure img { width: 100%; height: auto; }
 .work-figure figcaption { color: var(--ink-3); font-size: 0.875rem; line-height: 1.45; margin-top: 8px; }
 .work-figure figcaption strong { color: var(--ink-2); font-weight: 600; }
+.work-figure figcaption .fig-label { color: var(--ink); font-weight: 600; }
+.work-figure { scroll-margin-top: 96px; }
+.work-figure:target figcaption .fig-label { color: var(--accent); }
 /* Each chart ships a light and a dark rendering; show the one matching the theme. */
 .work-figure .fig-dark { display: none; }
 :root[data-theme="dark"] .work-figure .fig-light { display: none; }

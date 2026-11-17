@@ -38,6 +38,7 @@ const work = [
       {
         figures: [
           {
+            id: "percentiles",
             src: "images/projects/phantom-touch/latency-percentiles.png",
             srcDark: "images/projects/phantom-touch/latency-percentiles-dark.png",
             alt: "Median, 95th and 99th percentile latency per link: USB 6, 9 and 10 ms; BLE 17, 35 and 46 ms; Wi-Fi 10, 35 and 77 ms; Wi-Fi with power saving 72, 177 and 222 ms; Wi-Fi with power saving and BLE coexistence 31, 107 and 181 ms.",
@@ -46,10 +47,11 @@ const work = [
           },
         ],
       },
-      "Two Wi-Fi configurations were set aside after this comparison. With **power saving on**, the radio sleeps between the router's beacons and only collects waiting messages when it wakes, which pushed the median to **72 ms** and the 99th percentile to **222 ms**. With **power saving on and BLE running**, the two radios share one antenna and take turns, so Wi-Fi commands waited for BLE's time slots: about **3% of commands were lost** and the slowest took **391 ms**. On the ESP32-S3, Wi-Fi power saving cannot be turned off while BLE is active, so this is also the only way to run both radios at once. Neither configuration is usable for haptic feedback, so the rest of the analysis compares USB, BLE and Wi-Fi with power saving off.",
+      "Two Wi-Fi configurations were set aside after this comparison (@fig:percentiles). With **power saving on**, the radio sleeps between the router's beacons and only collects waiting messages when it wakes, which pushed the median to **72 ms** and the 99th percentile to **222 ms**. With **power saving on and BLE running**, the two radios share one antenna and take turns, so Wi-Fi commands waited for BLE's time slots: about **3% of commands were lost** and the slowest took **391 ms**. On the ESP32-S3, Wi-Fi power saving cannot be turned off while BLE is active, so this is also the only way to run both radios at once. Neither configuration is usable for haptic feedback, so the rest of the analysis compares USB, BLE and Wi-Fi with power saving off.",
       {
         figures: [
           {
+            id: "fingers",
             src: "images/projects/phantom-touch/latency-by_fingers.png",
             srcDark: "images/projects/phantom-touch/latency-by_fingers-dark.png",
             alt: "Box plots of latency for one to five fingers per command over USB, BLE and Wi-Fi with power saving off. USB medians step up from about 3.6 to 7.8 ms. BLE sits between about 15 and 19 ms and Wi-Fi between about 8 and 12 ms, with much wider spread.",
@@ -58,8 +60,8 @@ const work = [
           },
         ],
       },
-      "On the USB baseline, latency rises by about **1 ms per finger**, from a median of **3.6 ms** for one finger to **7.8 ms** for five. The glove's timestamps place the whole increase in the I²C stage, while transfer time over the link stays constant. Because the drivers share one address, the multiplexer must switch to each finger's channel before that driver can be written, so fingers are updated one after another on a 100 kHz bus. The radios carry the same cost, but their own variation largely hides it. Running the bus at 400 kHz should reduce it.",
-      "**Results and Conclusion:** **BLE is the glove's wireless link.** Wi-Fi had the lower median (**10 vs 17 ms**), but BLE had the **shorter worst case**: 99th percentile **46 vs 77 ms**, slowest command **81 vs 198 ms**. BLE delivered every command, even at 200 per second. For touch feedback, consistency matters more than raw speed: Wi-Fi's occasional very late pulse is more disruptive than BLE's steady extra few milliseconds. I therefore chose the link whose **slowest commands were fastest and that never dropped a command**, rather than the one with the lowest median. BLE also avoids keeping Wi-Fi power saving off, which likely costs battery (not yet measured). These timings stop when the glove commands the motor, so they show how the electronics perform, not whether a person would feel the difference. Phase 2 will test real conditions such as distance, the hand blocking the signal, and motor spin-up time.",
+      "On the USB baseline, latency rises by about **1 ms per finger** (@fig:fingers), from a median of **3.6 ms** for one finger to **7.8 ms** for five. The glove's timestamps place the whole increase in the I²C stage, while transfer time over the link stays constant. Because the drivers share one address, the multiplexer must switch to each finger's channel before that driver can be written, so fingers are updated one after another on a 100 kHz bus. The radios carry the same cost, but their own variation largely hides it. Running the bus at 400 kHz should reduce it.",
+      "**Results and Conclusion:** **BLE is the glove's wireless link.** Wi-Fi had the lower median (**10 vs 17 ms**), but BLE had the **shorter worst case**: 99th percentile **46 vs 77 ms**, slowest command **81 vs 198 ms** (@fig:percentiles). BLE delivered every command, even at 200 per second. For touch feedback, consistency matters more than raw speed: Wi-Fi's occasional very late pulse is more disruptive than BLE's steady extra few milliseconds. I therefore chose the link whose **slowest commands were fastest and that never dropped a command**, rather than the one with the lowest median. BLE also avoids keeping Wi-Fi power saving off, which likely costs battery (not yet measured). These timings stop when the glove commands the motor, so they show how the electronics perform, not whether a person would feel the difference. Phase 2 will test real conditions such as distance, the hand blocking the signal, and motor spin-up time.",
       { h: "Connecting XR Interactions", label: "Phase 2 (In Progress)" },
       "The next step is to connect virtual interaction events to the glove. I plan to use a **Unity keyboard prototype** in which each key produces two tactile events: one when a finger touches the key and another when it is pressed. To relay these events to individual actuators, I will evaluate existing BLE tools or build a custom tool if current options do not support the data capture, analysis, and frequency control I need.",
       "Early **Meta Quest 3** experiments also surfaced a hardware constraint: electronics mounted on the back of the hand appeared to interfere with hand tracking. I plan to move them to a wristband and then reassess tracking performance. Once the system is integrated, I can examine **touch-to-haptic latency, typing speed and accuracy, tracking performance, and user experience**.",
@@ -267,10 +269,35 @@ function escapeHTML(value) {
 
 // Escapes text, then turns [label](https://url) into an external link
 // and **phrase** into bold.
-function formatText(value) {
-  return escapeHTML(value)
+// With figs (from numberFigures), @fig:id becomes a "Figure N" link to that figure.
+function formatText(value, figs) {
+  let html = escapeHTML(value)
     .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  if (figs) {
+    html = html.replace(/@fig:([\w-]+)/g, (m, id) => {
+      const f = figs.get(id);
+      return f ? `<a class="fig-ref" href="#${f.anchor}">Figure ${f.n}</a>` : m;
+    });
+  }
+  return html;
+}
+
+// Numbers an entry's figures in reading order, like a paper: Figure 1, Figure 2...
+// Returns Map id -> { n, anchor }; figures without an id are numbered but can't be cited.
+function numberFigures(title, description) {
+  const slug = String(title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const figs = new Map();
+  let n = 0;
+  [].concat(description).forEach((item) => {
+    (item && item.figures || []).forEach((f) => {
+      n += 1;
+      const anchor = `${slug}-fig-${f.id || n}`;
+      f._num = { n, anchor };
+      if (f.id) figs.set(f.id, f._num);
+    });
+  });
+  return figs;
 }
 
 // A description item is one of:
@@ -279,25 +306,28 @@ function formatText(value) {
 //                               level 2 = subsection; label is an optional line above
 //                               the title, e.g. "Phase 1 (Complete)"
 //   { figures: [...] }          charts shown between paragraphs. Each figure:
-//                               { src, srcDark, alt, caption, wide }. srcDark replaces
-//                               src in the dark theme; wide spans the full text column.
-function renderDescriptionItem(item) {
-  if (typeof item === "string") return `<p class="work-desc">${formatText(item)}</p>`;
+//                               { id, src, srcDark, alt, caption, wide }. Figures are
+//                               numbered per entry ("Figure 1."); cite one in text with
+//                               @fig:<id>. srcDark replaces src in the dark theme; wide
+//                               spans the full text column.
+function renderDescriptionItem(item, figs) {
+  if (typeof item === "string") return `<p class="work-desc">${formatText(item, figs)}</p>`;
   if (item.h) {
     const tag = item.level === 2 ? "h5" : "h4";
     const label = item.label ? `<span class="work-h-label">${escapeHTML(item.label)}</span>` : "";
     return `<${tag} class="work-h work-h${item.level === 2 ? 2 : 1}">${label}<span class="work-h-title">${escapeHTML(item.h)}</span></${tag}>`;
   }
   const figures = (item.figures || [])
-    .map(({ src, srcDark, alt, caption, wide }) => {
+    .map(({ src, srcDark, alt, caption, wide, _num }) => {
       const img = (file, cls, hidden) =>
         `<a class="${cls}" href="${file}" target="_blank" rel="noopener"${hidden ? ' aria-hidden="true" tabindex="-1"' : ""}>
           <img src="${file}" alt="${hidden ? "" : escapeHTML(alt || "")}" loading="lazy" />
         </a>`;
-      return `<figure class="work-figure${wide ? " is-wide" : ""}">
+      const label = _num ? `<span class="fig-label">Figure ${_num.n}.</span> ` : "";
+      return `<figure class="work-figure${wide ? " is-wide" : ""}"${_num ? ` id="${_num.anchor}"` : ""}>
           ${img(src, "fig-light", false)}
           ${srcDark ? img(srcDark, "fig-dark", true) : ""}
-          ${caption ? `<figcaption>${formatText(caption)}</figcaption>` : ""}
+          ${caption || label ? `<figcaption>${label}${formatText(caption || "", figs)}</figcaption>` : ""}
         </figure>`;
     })
     .join("");
@@ -363,7 +393,10 @@ function renderTimeline(listId, items) {
           <p class="work-meta">${date ? `<time>${escapeHTML(date)}</time> · ` : ""}${escapeHTML(context)}${badge}</p>
           <h3 class="work-title">${heading}</h3>
           ${subtitle ? `<p class="work-subtitle">${escapeHTML(subtitle)}</p>` : ""}
-          ${[].concat(description).map(renderDescriptionItem).join("")}
+          ${(() => {
+            const figs = numberFigures(title, description);
+            return [].concat(description).map((d) => renderDescriptionItem(d, figs)).join("");
+          })()}
           ${tagItems ? `<ul class="tags" aria-label="Tags">${tagItems}</ul>` : ""}
           ${button}
         </div>
